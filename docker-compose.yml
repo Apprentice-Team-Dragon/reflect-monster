@@ -15,7 +15,7 @@ services:
 
   api:
     build: ./backend/
-    command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle install && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
       - ./backend:/api
       - ./backend/vendor/bundle:/api/vendor/bundle
@@ -34,7 +34,7 @@ services:
       - ./frontend/app:/front
     ports:
       - 4000:3000
-    command: sh -c "npm run dev"
+    command: sh -c "npm install && npm run dev"
     tty: true
     stdin_open: true
     environment:
