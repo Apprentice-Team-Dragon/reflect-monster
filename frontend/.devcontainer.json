@@ -1,0 +1,21 @@
+{
+	"name": "Front",
+	"dockerComposeFile": ["../docker-compose.yml"],
+	"service": "front",
+	"shutdownAction": "none",
+	"workspaceFolder": "/front",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"Shopify.ruby-lsp",
+				"streetsidesoftware.code-spell-checker",
+				"mosapride.zenkaku",
+				"oderwat.indent-rainbow",
+				"VisualStudioExptTeam.vscodeintellicode",
+				"shardulm94.trailing-spaces",
+				"esbenp.prettier-vscode",
+				"dbaeumer.vscode-eslint"
+			]
+		}
+	},
+}
