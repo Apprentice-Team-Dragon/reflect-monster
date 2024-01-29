@@ -1,33 +1,196 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+header {
+  height: 100%;
+  width: 100%;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+/* カレンダー */
+.calendar-container {
+  display: flex;
+  justify-content: center;
 }
+
+.calendar-contents {
+  width: 200px;
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  background-color: #d9d9d9;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.calendar-date {
+  color: black;
+  font-size: 25px;
+  align-items: center;
+  margin-left: 16px;
+}
+
+.calendar {
+  width: 55px;
+  height: 55px;
+}
+
+/* メインコンテンツ */
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  font-family: "Kiwi maru";
+  margin: 0;
+  padding: 0;
+  max-height: 100%;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* 目標 */
+.mission {
+  width: 100%;
+  min-height: 50px; /* 変更点: 高さが内容に合わせて伸びるようにmin-heightを使用 */
+  font-size: 32px;
+  display: flex;
+  justify-content: center; /* 水平方向中央揃え */
+  align-items: center; /* 垂直方向中央揃え */
+  overflow: hidden; /* 内容がコンテナを超えた場合は隠す */
+}
+
+.mission-contents {
+  text-align: center;
+  flex: 1; /* 子要素にフレックスコンテナの全幅を使用させる */
+  padding: 0 10px; /* コンテンツの左右に少しスペースを追加 */
+  white-space: nowrap; /* テキストを1行にする */
+  overflow: hidden; /* 内容がコンテナを超えた場合は隠す */
+  text-overflow: ellipsis; /* 内容が超えた場合に省略記号を表示 */
+  margin-top: 20px;
+}
+
+/* 生成画像表示部分 */
+.main-contents {
+  width: 100%;
+  display: flex; /* フレックスボックスとして設定 */
+  justify-content: center; /* 水平方向中央揃え */
+  align-items: center; /* 垂直方向中央揃え */
+  flex-grow: 1; /* 残りのスペースを埋める */
+}
+
+.monster-container {
+  text-align: center;
+  width: 500px;
+  height: 500px;
+  background-color: #d9d9d9;
+  /* ここにmarginを追加して、footerから離すことができます */
+  
+}
+
+.monster-container img {
+  margin-top: 80px;
+}
+
+.egg {
+  width: 200px;
+  height: 300px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+/* タスク一覧 */
+
+.main-content-task-left {
+  width: 400px;
+  height: 600px;
+  margin-right: 50px;
+}
+
+.left-task-contents li {
+  list-style: none;
+  width: 350px;
+  height: 50px;
+  list-style: none;
+  background-color: #d9d9d9;
+  margin-top: 51px;
+
+}
+
+.right-task-contents li {
+  list-style: none;
+  width: 350px;
+  height: 50px;
+  list-style: none;
+  background-color: #d9d9d9;
+  margin-top: 51px;
+
+}
+
+.main-content-task-right {
+  width: 400px;
+  height: 600px;
+  margin-left: 50px;
+}
+
+/* タスク一覧 */
+
+.task-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px; /* 各タスクアイテムの間隔を設定 */
+}
+
+.task-checkbox {
+  width: 24px; /* チェックボックスの幅を大きく */
+  height: 24px; /* チェックボックスの高さを大きく */
+  margin-right: 10px;
+  cursor: pointer; /* ホバー時にカーソルをポインターに変更 */
+}
+
+.task-text {
+  text-align: right;
+  flex-grow: 1;
+  font-size: 18px; /* テキストのフォントサイズを大きく */
+  cursor: default; /* テキスト上ではカーソルがデフォルトの状態に */
+}
+
+
+
+/* フッター */
+footer {
+  height: 20px;
+}
+
+.menu-list {
+  height: 144px;
+  list-style: none;
+
+  padding: 20px;
+  display: flex;
+  justify-content: space-around; /* メニューアイテムを均等に配置 */
+  align-items: center; /* メニューアイテムを垂直方向に中央揃え */
+}
+
+.menu-item {
+
+  display: flex;
+  flex-direction: column; /* 子要素を縦に並べる */
+  align-items: center; /* 子要素を水平方向に中央揃え */
+}
+
+.menu-item img {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 5px; /* 画像とテキストの間のマージン */
+}
+
+.exp-container {
+  display: flex;
+  flex-direction: column; /* 子要素を縦に並べる */
+  align-items: center;
+}
+
+.exp-bar{
+  width: 500px;
+  height: 20px;
+  background-color: antiquewhite;
 }
