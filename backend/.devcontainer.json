@@ -1,0 +1,23 @@
+{
+	"name": "api",
+	"dockerComposeFile": [
+		"../docker-compose.yml"
+	],
+	"service": "api",
+	"shutdownAction": "none",
+	"workspaceFolder": "/api",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"Shopify.ruby-lsp",
+				"rubocop.vscode-rubocop",
+				"streetsidesoftware.code-spell-checker",
+				"mosapride.zenkaku",
+				"oderwat.indent-rainbow",
+				"VisualStudioExptTeam.vscodeintellicode",
+				"shardulm94.trailing-spaces",
+				"bung87.rails"
+			]
+		}
+	},
+}
