@@ -17,7 +17,9 @@ export default function Home() {
         <TaskList />
       </div>
       <ExpBar />
-      <Menu />
+      <div className='footer'>
+        <Menu />
+      </div>
     </div>
   );
 }

@@ -1,3 +1,9 @@
+body,
+html {
+  height: 100%;
+  margin: 0;
+}
+
 /* カレンダー */
 .calendar-container {
   display: flex;
@@ -43,7 +49,7 @@ body {
 .mission-contents {
   text-align: center;
   flex: 1;
-  padding: 0 10px;
+  padding: 16px 10px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -63,6 +69,9 @@ body {
   width: 500px;
   height: 500px;
   background-color: #d9d9d9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* タスク一覧 */
@@ -87,6 +96,7 @@ body {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  padding: 0 80px;
 }
 
 .task-checkbox {
@@ -100,40 +110,64 @@ body {
   font-size: 18px;
 }
 
+.exp-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 500px;
+  margin: auto;
+  margin-top: 24px;
+}
+
+.exp-bar {
+  width: 500px;
+  height: 50px;
+  margin-top: 4px;
+  background-color: #d9d9d9;
+  border-radius: 5px;
+}
+
+.exp-bar-text {
+  width: 100%;
+  text-align: left;
+  font-size: 20px;
+}
+
 /* フッター */
-footer {
-  height: 20px;
+.footer {
+  width: 100%;
+  padding: 8px 0;
+  background-color: #d9d9d9;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.menu-container {
+  width: 60%;
+  margin: auto;
 }
 
 .menu-list {
-  height: 144px;
+  width: 100%; /* メニューリストの幅を画面全体に */
   list-style: none;
-  padding: 20px;
+  padding: 0;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-around; /* アイテム間に等間隔を設ける */
   align-items: center;
+  margin: 0; /* デフォルトのマージンをリセット */
 }
 
 .menu-item {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 10px 0; /* 上下のパディングを設定 */
 }
 
 .menu-item img {
   width: 50px;
   height: 50px;
   margin-bottom: 5px;
-}
-
-.exp-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.exp-bar {
-  width: 500px;
-  height: 20px;
-  background-color: antiquewhite;
 }
