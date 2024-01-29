@@ -66,8 +66,9 @@ body {
 }
 
 /* タスク一覧 */
-.main-tasks-monster-container{
+.main-tasks-monster-container {
   display: flex;
+  justify-content: center;
 }
 
 .task-list-container {
@@ -136,4 +137,3 @@ footer {
   height: 20px;
   background-color: antiquewhite;
 }
-
