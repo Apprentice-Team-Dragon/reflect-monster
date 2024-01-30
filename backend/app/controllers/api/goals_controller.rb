@@ -15,7 +15,7 @@ class Api::GoalsController < ApplicationController
   end
 
   def update
-    if @goal.update(create_update_param)
+    if @goal.update(transform_camel_to_snake(put_params))
       render json: @goal.generate_response
     else
       render json: { message: @goal.errors, status: 422 }, status: :unprocessable_entity
@@ -25,16 +25,6 @@ class Api::GoalsController < ApplicationController
   private
     def set_goal
       @goal = Goal.find(params[:id])
-    end
-
-    def create_update_param
-      res = {}
-      input = put_params
-
-      res[:content] = input[:content] if input[:content]
-      res[:is_completed] = input[:isCompleted] if input[:isCompleted]
-
-      res
     end
 
     def goal_response(goal = nil)

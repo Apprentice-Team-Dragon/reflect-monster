@@ -20,6 +20,8 @@ class Api::MonstersController < ApplicationController
   end
 
   def update
+    @monster.update(monster_params)
+    render json: generate_response(@monster)
   end
 
   private
@@ -27,23 +29,10 @@ class Api::MonstersController < ApplicationController
       @monster = Monster.find(params[:id])
     end
 
-    def generate_new_monser
-      flag = params[:monsterId]
-
-      unless flag
-        Monster.new(monster_params)
-      else
-        new_monster = Monster.new(monster_params)
-        prev_monster = Monster.find(flag)
-        prev_monster.update(is_selected: false)
-        new_monster
-      end
-    end
-
     def monster_params
-      input = params.require(:monster).permit(:image, :species, :color, :seed, :is_selected, :expPoint, :maxExpPoint, :evolutionStage)
+      res = params.require(:monster).permit(:image, :species, :color, :seed, :is_selected, :expPoint, :maxExpPoint, :evolutionStage)
 
-      { image: input[:image], exp_point: input[:expPoint], max_exp_point: input[:maxExpPoint], evolution_stage: input[:evolutionStage], species: input[:species], color: input[:color], seed: input[:seed], is_selected: input[:is_selected] }
+      transform_camel_to_snake(res)
     end
 
     def generate_response(monster)

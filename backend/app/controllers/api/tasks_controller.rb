@@ -29,6 +29,15 @@ class Api::TasksController < ApplicationController
       render json: { tasks: tasks.map { |ele| ele.generate_response } }
     end
 
+    def create_update_params(task)
+      res = {}
+      res[:content] = task[:content] if task[:content]
+      res[:is_completed] = task[:isCompleted] if task[:isCompleted]
+      res[:is_removed] = task[:isRemoved] if task[:isRemoved]
+
+      res
+    end
+
     def create_tasks(goal_id, tasks)
       tasks.map do |task|
         new_task = Task.new(goal_id:, content: task[:content], exec_date: task[:execDate])
@@ -41,7 +50,7 @@ class Api::TasksController < ApplicationController
       registered_tasks = tasks.map { |ele| base_tasks.find(ele[:id]) }
 
       registered_tasks.each_with_index do |task, index|
-        task.update(content: tasks[index][:content], is_completed: tasks[index][:isCompleted], is_removed: tasks[index][:isRemoved])
+        task.update(create_update_params(tasks[index]))
       end
     end
 end
