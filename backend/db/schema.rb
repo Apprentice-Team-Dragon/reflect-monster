@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_29_164321) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_30_095723) do
   create_table "goals", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.text "content", null: false
     t.boolean "is_completed", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "monsters", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.text "image", null: false
+    t.bigint "exp_point", null: false
+    t.bigint "max_exp_point", null: false
+    t.integer "evolution_stage", null: false
+    t.string "species", null: false
+    t.string "color", null: false
+    t.integer "seed", default: 0, null: false
+    t.boolean "is_selected", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
