@@ -1,33 +1,173 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+body,
+html {
+  height: 100%;
+  margin: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+/* カレンダー */
+.calendar-container {
+  display: flex;
+  justify-content: center;
 }
 
+.calendar-contents {
+  width: 200px;
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  background-color: #d9d9d9;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.calendar-date {
+  color: black;
+  font-size: 25px;
+  margin-left: 16px;
+}
+
+/* メインコンテンツ */
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  font-family: "Kiwi Maru", sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* 目標 */
+.mission {
+  width: 100%;
+  min-height: 50px;
+  font-size: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mission-contents {
+  text-align: center;
+  flex: 1;
+  padding: 16px 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 20px;
+}
+
+/* 生成画像表示部分 */
+.main-contents {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.monster-container {
+  text-align: center;
+  width: 500px;
+  height: 500px;
+  background-color: #d9d9d9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* タスク一覧 */
+.main-tasks-monster-container {
+  display: flex;
+  justify-content: center;
+}
+
+.task-list-container {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 50px;
+}
+
+.task-list {
+  list-style: none;
+  padding: 0;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 0 80px;
+}
+
+.task-checkbox {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+.task-text {
+  flex-grow: 1;
+  font-size: 18px;
+}
+
+.exp-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 500px;
+  margin: auto;
+  margin-top: 24px;
+}
+
+.exp-bar {
+  width: 500px;
+  height: 50px;
+  margin-top: 4px;
+  background-color: #d9d9d9;
+  border-radius: 5px;
+}
+
+.exp-bar-text {
+  width: 100%;
+  text-align: left;
+  font-size: 20px;
+}
+
+/* フッター */
+.footer {
+  width: 100%;
+  padding: 8px 0;
+  background-color: #d9d9d9;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.menu-container {
+  width: 60%;
+  margin: auto;
+}
+
+.menu-list {
+  width: 100%; /* メニューリストの幅を画面全体に */
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: space-around; /* アイテム間に等間隔を設ける */
+  align-items: center;
+  margin: 0; /* デフォルトのマージンをリセット */
+}
+
+.menu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 0; /* 上下のパディングを設定 */
+}
+
+.menu-item img {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 5px;
 }
