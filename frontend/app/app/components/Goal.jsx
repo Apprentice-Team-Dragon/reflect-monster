@@ -1,4 +1,4 @@
-export default function () {
+export default function Goal() {
   return (
     <div className="mission">
       <div className="mission-contents">
