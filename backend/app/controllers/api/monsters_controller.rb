@@ -7,12 +7,15 @@ class Api::MonstersController < ApplicationController
   def create
     monster = Monster.new(monster_params)
 
-    if monster.save
-      if params[:monsterId]
-        prev_monster = Monster.find(params[:monsterId])
-        prev_monster.update(is_selected: false)
-      end
+    if params[:monsterId]
+      prev_monster = Monster.find(params[:monsterId])
+      prev_monster.update(is_selected: false)
+    else
+      monster.set_random_color.set_random_image.set_random_species
+    end
 
+
+    if monster.save
       render json: monster.generate_response
     else
       render json: { message: user.errors.full_messages.join(" "), status: 422 }, status: :unprocessable_entity
