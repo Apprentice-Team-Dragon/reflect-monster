@@ -8,9 +8,7 @@ export function useGetMonster(monsterId) {
       "Content-Type": "application/json",
     },
   };
-  const { data, isLoading, hasError, errorMessage } = useFetch(url, {
-    ...config,
-  });
+  const { data, isLoading, hasError, errorMessage } = useFetch(url, config);
   return { data, isLoading, hasError, errorMessage };
 }
 
@@ -23,8 +21,6 @@ export function useGetMonster(monsterId) {
 //       "Content-Type": "application/json",
 //     },
 //   };
-//   const { data, isLoading, hasError, errorMessage } = useFetch(url, {
-//     ...config,
-//   });
+//   const { data, isLoading, hasError, errorMessage } = useFetch(url, config);
 //   return { data, isLoading, hasError, errorMessage };
 // }
