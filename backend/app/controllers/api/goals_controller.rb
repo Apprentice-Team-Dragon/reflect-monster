@@ -1,7 +1,7 @@
 class Api::GoalsController < ApplicationController
   before_action :set_goal, only: [:get, :update]
   def get
-    render json: { goal: goal_response(@goal) }
+    render json: { goal: @goal.generate_response }
   end
 
   def create
@@ -25,10 +25,6 @@ class Api::GoalsController < ApplicationController
   private
     def set_goal
       @goal = Goal.find(params[:id])
-    end
-
-    def goal_response(goal = nil)
-      { id: goal&.id, content: goal&.content, isCompleted: goal&.is_completed }
     end
 
     def get_content_params
