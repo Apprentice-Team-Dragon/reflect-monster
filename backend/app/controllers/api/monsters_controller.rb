@@ -1,5 +1,6 @@
 class Api::MonstersController < ApplicationController
-  before_action :set_monster, only: [:get, :update]
+  before_action :set_monster, only: [:update]
+
   def get
     render json: set_selected_monster
   end

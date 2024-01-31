@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     get  "/tasks",              to: "tasks#get"
     post "/tasks",              to: "tasks#create"
     put  "/tasks",              to: "tasks#update"
-    get  "/monsters/:id",       to: "monsters#get"
+    get  "/monsters",           to: "monsters#get"
     post "/monsters",           to: "monsters#create"
     put  "/monsters/:id",       to: "monsters#update"
   end
