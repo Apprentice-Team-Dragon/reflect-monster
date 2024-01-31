@@ -26,4 +26,44 @@ class Monster < ApplicationRecord
     self.image = egg_images[rand(0...egg_images.length)]
     self
   end
+
+  def set_selected(bool)
+    self.is_selected = bool
+    self
+  end
+
+  # デモによって値は修正する
+  def set_max_exp
+    self.max_exp_point = 6
+    self
+  end
+
+  def set_evolution_zero
+    self.evolution_stage = 0
+    self
+  end
+
+  def set_seed_zero
+    self.seed = 0
+    self
+  end
+
+  def set_exp
+    self.exp_point = 0
+    self
+  end
+
+  def set_evolution_stage(stage)
+    self.evolution_stage = stage
+    self
+  end
+
+  def set_evolution(prev_monster)
+    self.species = prev_monster.species
+    self.color = prev_monster.color
+    self.seed = prev_monster.seed
+    self.evolution_stage = prev_monster.evolution_stage + 1
+
+    self
+  end
 end
