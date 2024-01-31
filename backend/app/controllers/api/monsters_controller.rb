@@ -5,7 +5,7 @@ class Api::MonstersController < ApplicationController
   end
 
   def create
-    monster = Monster.new(monster_params).set_exp.set_max_exp.set_selected(true)
+    monster = Monster.new(create_params).set_exp.set_max_exp.set_selected(true)
 
     # 進化する場合
     if params[:monsterId]
@@ -30,7 +30,7 @@ class Api::MonstersController < ApplicationController
   end
 
   def update
-    @monster.update(monster_params)
+    @monster.update(update_params)
     render json: @monster.generate_response
   end
 
@@ -43,8 +43,11 @@ class Api::MonstersController < ApplicationController
       @monster = Monster.find(params[:id])
     end
 
-    def monster_params
-      res = params.require(:monster).permit(:expPoint, :image)
+    def create_params
+      params.require(:monster).permit(:image)
+    end
+    def update_params
+      res = params.require(:monster).permit(:expPoint)
 
       transform_camel_to_snake(res)
     end
