@@ -14,7 +14,6 @@ export default function Home() {
       <div className="main-tasks-monster-container"> 
         <TaskList />
         <Monster />
-        <TaskList />
       </div>
       <ExpBar />
       <div className='footer'>
