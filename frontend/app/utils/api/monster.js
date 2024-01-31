@@ -2,21 +2,6 @@
 
 const { createClient } = require("@supabase/supabase-js");
 import { decode } from "base64-arraybuffer";
-// const ANIMALS = [
-//   "rat",
-//   "cow",
-//   "tiger",
-//   "rabbit",
-//   "dragon",
-//   "snake",
-//   "horse",
-//   "sheep",
-//   "monkey",
-//   "checken",
-//   "dog",
-//   "boar",
-// ];
-// const COLORS = ["red", "blue", "green", "yellow", "pink", "white", "black"];
 
 // ラベルに応じてモンスター生成用プロンプトを作成
 async function prompts(label, animal, color) {
@@ -112,14 +97,10 @@ async function generateMonsterImage(label, animal, color, seed) {
   return data;
 }
 // モンスター画像の背景を透過
-export async function removeBackground(base64Image) {
-  // const timestamp = new Date().getTime();
-  // const uniqueIdentifier = Math.random().toString(36).substring(2, 9);
+async function removeBackground(base64Image) {
   const url = "https://api.remove.bg/v1.0/removebg";
   const raw = JSON.stringify({
     image_file_b64: base64Image,
-    // size: "preview",
-    // bg_image_url: `${timestamp}_${uniqueIdentifier}.png`,
   });
   const config = {
     method: "POST",
@@ -135,7 +116,7 @@ export async function removeBackground(base64Image) {
 }
 
 // 画像をsupabaseへアップロード
-export async function uploadImage(base64Image) {
+async function uploadImage(base64Image) {
   const supabaseUrl = process.env.SUPABASE_URL;
   const supabaseKey = process.env.SUPABASE_KEY;
   const supabase = createClient(supabaseUrl, supabaseKey);
@@ -178,10 +159,13 @@ async function getGoalText(goalId) {
   return data.goal.content;
 }
 
-async function postMonster(monsterId) {
+// TODO 卵生成用の関数を作成する
+
+// モンスター進化
+async function postMonster(monsterId, monsterImage) {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/monsters?monsterId=${monsterId}`;
   const raw = JSON.stringify({
-    image: image,
+    image: monsterImage,
   });
   const config = {
     method: "POST",
@@ -194,6 +178,24 @@ async function postMonster(monsterId) {
   return data;
 }
 
+// モンスターに経験値付与
+export async function addExpPoint(monsterId, expPoint) {
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/monsters/${monsterId}`;
+  const raw = JSON.stringify({
+    expPoint: expPoint,
+  });
+  const config = {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: raw,
+  };
+  const data = await fetchFunction(url, config);
+  return data;
+}
+
+// TODO 引数をgoalIdにする → generateMonster(goalId, monsterInfo)
 // モンスター生成の一連の処理 monster objectを返す
 export async function generateMonster(goalText, monsterInfo) {
   // const text = await getGoalText(goalId); //TODO
