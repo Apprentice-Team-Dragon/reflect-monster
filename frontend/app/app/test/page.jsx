@@ -6,34 +6,46 @@ import {
   getGoalCategory,
   removeBackground,
 } from "@/utils/api/monster";
-import { useIsEvolve } from "@/hooks/monsterhook/monster";
+import { useIsEvolve } from "@/hooks/MonsterHooks/monster";
 import { useCallback } from "react";
 import Image from "next/image";
-import { useState } from "react";
-import { uploadImage } from "@/utils/strage";
+import { useState, useEffect } from "react";
+// import { uploadImage } from "@/utils/strage";
+import Monster from "../components/Monster"
+import {useGetMonster} from "@/hooks/MonsterHooks/useGetMonster"
 
 
 export default function Test() {
-  const url = "https://api.stability.ai/v1/user/balance";
-  const config = {
-    method: "GET",
-    headers: {
-      Authorization: "Bearer " + process.env.NEXT_PUBLIC_STABILITY_API_KEY,
-      "Content-Type": "application/json",
-    },
-  };
-  const { data, isLoading, hasError, errorMessage } = useFetch(url, {
-    ...config,
-  });
+  // const url = "https://api.stability.ai/v1/user/balance";
+  // const config = {
+  //   method: "GET",
+  //   headers: {
+  //     Authorization: "Bearer " + process.env.NEXT_PUBLIC_STABILITY_API_KEY,
+  //     "Content-Type": "application/json",
+  //   },
+  // };
+  // const { data, isLoading, hasError, errorMessage } = useFetch(url, {
+  //   ...config,
+  // });
+  // const { modalStatus, closeModal, openModal } = useModal();
 
-  const { modalStatus, closeModal, openModal } = useModal();
+
+  const { data, isLoading, hasError, errorMessage } = useGetMonster(1);
+  const { monster, setMonster } = useState(null);
+  useEffect(() => {
+    const hundleMonster = ()=> {
+      setMonster((prevMonster) => data.monster)
+    }
+  }, [])
+
+  console.log(monster)
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
   if (hasError) {
-    const error = errorMessage.message;
+    const error = errorMessage;
     return <div>{error}</div>;
   }
 
@@ -45,6 +57,7 @@ export default function Test() {
         <button onClick={() => openModal()}>Open</button>
       </div>
       <ModalComponent modalStatus={modalStatus} closeModal={closeModal} />
+      <Monster />
     </div>
   );
 }
