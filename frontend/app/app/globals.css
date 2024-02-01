@@ -192,3 +192,41 @@ body {
   height: 50px;
   margin-bottom: 5px;
 }
+
+.menu-item:hover {
+  background-color: #ececec; /* ここに好きな色を指定 */
+  cursor: pointer; /* オプショナル：マウスカーソルをポインターに変更 */
+}
+
+.menu-item:hover img {
+  /* 画像に対する追加のスタイルがあればここに記述 */
+}
+
+.menu-item:hover span {
+  color: #333333; /* 文字色の変更 */
+}
+
+
+.btn {
+  position: relative; /* static以外を指定 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 60px;
+  border-radius: 100px;
+  background-color: #6cc7f4;
+  color: #fff;
+  font-family: "Signika";
+  font-size: 1.2em;
+  font-weight: bold;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+/* ボタンホバー時 */
+.btn:hover {
+  background-color: #fff;
+  color: #6cc7f4;
+  box-shadow: 0 0 20px 0 rgba(108, 199, 244, 0.5);
+}
