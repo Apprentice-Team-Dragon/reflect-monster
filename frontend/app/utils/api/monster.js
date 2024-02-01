@@ -162,10 +162,10 @@ async function getGoalText(goalId) {
 // TODO 卵生成用の関数を作成する
 
 // モンスター進化
-async function postMonster(monsterId, monsterImage) {
+async function postMonster(monsterId, imagePath) {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/monsters?monsterId=${monsterId}`;
   const raw = JSON.stringify({
-    image: monsterImage,
+    image: imagePath,
   });
   const config = {
     method: "POST",
@@ -197,9 +197,9 @@ export async function addExpPoint(monsterId, expPoint) {
 
 // TODO 引数をgoalIdにする → generateMonster(goalId, monsterInfo)
 // モンスター生成の一連の処理 monster objectを返す
-export async function generateMonster(goalText, monsterInfo) {
-  // const text = await getGoalText(goalId); //TODO
-  const text = goalText;
+export async function generateMonster(goalId, monsterInfo) {
+  const text = await getGoalText(goalId);
+  // const text = goalText;
   const evolutionStage = monsterInfo.evolutionStage;
   const animal = monsterInfo.animal;
   const color = monsterInfo.color;
@@ -231,9 +231,9 @@ export async function generateMonster(goalText, monsterInfo) {
   );
   const monsterImage = removeBackgroundData.data.result_b64;
   const imagePath = await uploadImage(monsterImage);
-  // const monsterImagePath = await postMonster(imagePath);
+  const monsterImagePath = await postMonster(monsterId, imagePath);
   // return monsterImagePath.monster
 
-  return imagePath;
+  return monsterImagePath;
 }
 
