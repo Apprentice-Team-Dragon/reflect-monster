@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Calender from "./components/Calender";
 import Goal from "./components/Goal";
-import TaskList from "./components/TaskList";
+import TaskList from "./components/TaskList/ index";
 import Monster from "./components/Monster";
 import ExpBar from "./components/ExpBar";
 import Menu from "./components/Menu";
