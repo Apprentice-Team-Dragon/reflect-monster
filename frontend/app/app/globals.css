@@ -83,7 +83,7 @@ body {
 
 /* タスク一覧 */
 .main-tasks-monster-container {
-  position: relative  ;
+  position: relative;
 }
 .task-list-container {
   width: 100%; /* タスクリスト全体の幅を100%に設定 */
@@ -138,7 +138,6 @@ body {
   margin: auto;
   margin-top: 24px;
 }
-
 
 .exp-bar {
   width: 500px;
@@ -205,7 +204,6 @@ body {
 .menu-item:hover span {
   color: #333333; /* 文字色の変更 */
 }
-
 
 .btn {
   position: relative; /* static以外を指定 */
