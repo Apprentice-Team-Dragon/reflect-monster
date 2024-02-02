@@ -1,9 +1,31 @@
+"use client";
+import React, { useEffect, useState } from "react";
+
 export default function Goal() {
+  const [goal, setGoal] = useState(null);
+
+  useEffect(() => {
+    const getGoal = async () => {
+      try {
+        const goalContent = await fetch(
+          `http://localhost:3000/api/goals/1/contents`
+        );
+        const data = await goalContent.json();
+        setGoal(data.goal);
+      } catch (error) {
+        console.error("Error fetching goal:", error);
+      }
+    };
+
+    getGoal();
+  }, []);
+
   return (
     <div className="mission">
       <div className="mission-contents">
-        目標
+        <h2>目標</h2>
+        <p>{goal?.content}</p>
       </div>
-  </div>
+    </div>
   );
 }
