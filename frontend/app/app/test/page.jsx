@@ -1,43 +1,28 @@
 "use client";
-import useFetch from "@/hooks/useFetch";
 import useModal from "@/hooks/useModal";
 import { generateMonster } from "@/utils/api/monster";
-import { useIsEvolve } from "@/hooks/MonsterHooks/monster";
+import { getMonster, getCredit } from "@/utils/api/monster";
+import { useIsEvolve } from "@/hooks/MonsterHooks/useIsEvolve";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Monster from "../components/Monster"
 import {useGetMonster} from "@/hooks/MonsterHooks/useGetMonster"
+import { addExpPoint } from "@/utils/api/monster";
 
 
 export default function Test() {
 
   const { modalStatus, closeModal, openModal } = useModal();
 
-  const { data, isLoading, hasError, errorMessage } = useGetMonster(1);
+  const { monsterFetchInfo } = useGetMonster();
 
-
-  console.log(data)
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (hasError) {
-    const error = errorMessage;
-    return <div>{error}</div>;
-  }
-
-  // const result = data?.credits;
-  const result = data?.monster.image;
   return (
     <div>
-      {result}
       <div>
         <button onClick={() => openModal()}>Open</button>
       </div>
       <ModalComponent modalStatus={modalStatus} closeModal={closeModal} />
-      {/* <Monster {...data.monster}/> */}
-      <Monster {...data.monster}/>
+      {/* <Monster {...monsterFetchInfo}/> */}
     </div>
   );
 }
@@ -73,6 +58,15 @@ const ModalComponent = ({ modalStatus, closeModal }) => {
     setMonterImage(() => image);
     setPoint(0);
   }
+  async function hundleGetMonster() {
+    // const response = await fetch('http://localhost:3000/api/monsters');
+    // const data = await response.json();
+    // console.log(data)
+    // const monster = await getMonster();
+    // // const monster = await addExpPoint(6, 1);
+    // console.log(monster)
+    const data = getCredit();
+  }
 
   if (!modalStatus) return null;
 
@@ -81,6 +75,7 @@ const ModalComponent = ({ modalStatus, closeModal }) => {
       <p>ここはコンテンツです。</p>
       <button onClick={() => closeModal()}>Close</button>
       <div>{point}</div>
+      <button onClick={() => hundleGetMonster()}>モンスター取得</button>
       <button onClick={() => hundlePoint()}>ポイント追加</button>
       {isEvolve ? (
         <button onClick={() => hundleEvolve()}>進化させる</button>

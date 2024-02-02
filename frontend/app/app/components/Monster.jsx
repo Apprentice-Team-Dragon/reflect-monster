@@ -1,13 +1,33 @@
-'use client'
 import Image from "next/image";
+import { CircularProgress } from "@mui/material";
 
-export default function Monster(monsterImagePath) {
+export default function Monster({useMonsterState}) {
+  const { monster, isLoading, hasError, errorMessage } = useMonsterState;
 
-  return (
-    <div className="monster-container">
-      {/* <Image src={"/img/firstegg.png"} alt="卵" width={500} height={500}/> */}
-      <Image src={process.env.NEXT_PUBLIC_STRAGE_URL/monsterImagePath} alt="卵" width={500} height={500}/>
-      {/* <Image src={`${process.env.NEXT_PUBLIC_STRAGE_URL}/1706632518363_amg8wzx.png`} alt="卵" width={500} height={500}/> */}
-    </div>
-  );
+  if (isLoading) {
+    return (
+      <div className="monster-container">
+        <CircularProgress />
+      </div>
+    );
+  }
+  if (hasError) {
+    return (
+      <div className="monster-container">
+        {errorMessage.status} : {errorMessage.error}
+      </div>
+    );
+  }
+  if (monster) {
+    return (
+      <div className="monster-container">
+        <Image
+          src={`${process.env.NEXT_PUBLIC_STRAGE_URL}/${monster.image}`}
+          alt="monster_image"
+          width={400}
+          height={400}
+        />
+      </div>
+    );
+  }
 }

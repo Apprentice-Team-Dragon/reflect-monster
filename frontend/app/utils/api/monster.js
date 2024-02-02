@@ -38,11 +38,11 @@ async function prompts(label, animal, color) {
 async function fetchFunction(url, config) {
   try {
     const response = await fetch(url, config);
-    const data = await response.json();
     if (!response.ok) {
       console.error(response);
       throw new Error(`API error: ${response.status}`);
     }
+    const data = await response.json();
     console.log(data);
     return data;
   } catch (error) {
@@ -150,14 +150,14 @@ async function uploadImage(base64Image) {
 async function getGoalText(goalId) {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/goals/${goalId}`;
   const config = {
-    method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
   };
-  const data = fetchFunction(url, config);
+  const data = await fetchFunction(url, config);
   return data.goal.content;
 }
+
 
 // TODO 卵生成用の関数を作成する
 
@@ -170,23 +170,7 @@ async function postMonster(monsterId, imagePath) {
   const config = {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
-    },
-    body: raw,
-  };
-  const data = await fetchFunction(url, config);
-  return data;
-}
-
-// モンスターに経験値付与
-export async function addExpPoint(monsterId, expPoint) {
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/monsters/${monsterId}`;
-  const raw = JSON.stringify({
-    expPoint: expPoint,
-  });
-  const config = {
-    method: "PUT",
-    headers: {
+      accept: "application/json",
       "Content-Type": "application/json",
     },
     body: raw,
@@ -237,3 +221,18 @@ export async function generateMonster(goalId, monsterInfo) {
   return monsterImagePath;
 }
 
+export async function getCredit() {
+  const url =
+    "https://api.stability.ai/v1/user/balance";
+  const config = {
+    method: "GET",
+    headers: {
+      Authorization: "Bearer " + process.env.STABILITY_API_KEY,
+      "Content-Type": "application/json",
+    },
+  };
+  const data = await fetchFunction(url, config);
+  console.log(data)
+
+  return data;
+}

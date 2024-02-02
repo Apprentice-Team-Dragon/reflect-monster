@@ -15,6 +15,6 @@ export function useIsEvolve(expPoint, maxExpPoint) {
       hundleNotIsEvolve();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [expPoint]);
+  }, [expPoint, maxExpPoint]);
   return { isEvolve };
 }
