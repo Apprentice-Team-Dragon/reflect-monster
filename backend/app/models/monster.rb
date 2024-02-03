@@ -21,7 +21,7 @@ class Monster < ApplicationRecord
   end
 
   def set_initial_egg
-    self.image = "firstedd.png"
+    self.image = "firstegg.png"
     self
   end
 
