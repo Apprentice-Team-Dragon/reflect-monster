@@ -178,5 +178,5 @@ export async function generateMonster(goalContent, {evolution_stage, animal, col
 
   const imagePath = await uploadImage(generatedImage);
 
-  return { imagePath, seed };
+  return { imagePath, seedValue };
 }
