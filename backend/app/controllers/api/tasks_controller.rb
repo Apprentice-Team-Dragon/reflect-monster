@@ -11,11 +11,10 @@ class Api::TasksController < ApplicationController
     render json: { task: task }, status: 201
   end
 
-  # タスクの更新がないので一旦コメントアウト
-  # def update
-  #   task = update_tasks(params[:tasks], @tasks)
-  #   render json: { task: task }, status: 201
-  # end
+  def update
+    task = update_tasks(params[:tasks], @tasks)
+    render json: { task: task }, status: 201
+  end
 
   private
     def set_goal_id
