@@ -1,18 +1,13 @@
-import "./style.scss";
 import Image from "next/image";
 import { CircularProgress, LinearProgress } from "@mui/material";
 
-export default function Monster({
-  useMonsterState,
-  generateMonsterInfo,
-  animationClass,
-}) {
+export default function Monster({useMonsterState, generateMonsterInfo}) {
   const { monster, isLoading, hasError, errorMessage } = useMonsterState;
   const { isGenerating, haGenerateError } = generateMonsterInfo;
 
   if (isLoading || isGenerating) {
     return (
-      <div className={`monster-container ${animationClass}`}>
+      <div className="monster-container">
         <CircularProgress />
       </div>
     );
