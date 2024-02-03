@@ -61,7 +61,6 @@ export default function Home() {
 
   const { useTasksState } = useTasks(goalId, execDate);
   useUpdateTasks(goalId, execDate, useTasksState.tasks, useTasksState.isUpdated, useTasksState.hundleFalseIsUpdated);
-  console.log(useTasksState.isUpdated)
 
   return (
     <div>

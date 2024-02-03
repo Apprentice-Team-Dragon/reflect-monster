@@ -27,7 +27,6 @@ export function useUpdateTasks(
     const updateTasks = async () => {
       const response = await fetch(url, config);
       const data = await response.json();
-      console.log(data);
     };
     if (isUpdated) {
       updateTasks();
