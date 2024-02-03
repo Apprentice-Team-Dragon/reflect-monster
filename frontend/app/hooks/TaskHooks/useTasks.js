@@ -46,9 +46,14 @@ export function useTasks(goalId, execDate) {
     updatedTasks[index].isCompleted = !updatedTasks[index].isCompleted;
     setTasks({ tasks: updatedTasks })
   }
-  function hundleRemovedTasks(tasks, index) {
+  function hundleRemovedTasks(tasks) {
     const removedTasks = [...tasks.tasks];
-    removedTasks[index].isCompleted = !removedTasks[index].isCompleted;
+    for (let index = 0; index < removedTasks.length; index++) {
+      if(removedTasks[index].isCompleted) {
+        removedTasks[index].isRemoved = true;
+      }
+      
+    }
     setTasks({ tasks: removedTasks })
   }
 
@@ -59,7 +64,8 @@ export function useTasks(goalId, execDate) {
     errorMessage,
     hundleCreateTasks,
     hundleUpdateTasks,
-    hundleCompletedTasks
+    hundleCompletedTasks,
+    hundleRemovedTasks
   };
   return { useTasksState };
 }

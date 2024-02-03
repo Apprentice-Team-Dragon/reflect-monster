@@ -17,6 +17,24 @@ import { useTasks } from "@/hooks/TaskHooks/useTasks"
 
 export default function Home() {
   const [isModalOpen, setModalIsOpen] = useState(false);
+  const [animationClasses, setAnimationClasses] = useState({
+    tasks: "",
+    monster: "",
+  });
+
+  function handleClickCompleteButton() {
+    setAnimationClasses({
+      tasks: "moveToEgg",
+      monster: "bounce",
+    });
+
+    setTimeout(function () {
+      setAnimationClasses({
+        tasks: "moveToEgg",
+        monster: "",
+      });
+    }, 300);
+  }
 
   const { useMonsterState } = useMonster();
   const { currentExpPoint, hundleAddExpPoint, hundleReduceExpPoint } =
@@ -29,7 +47,11 @@ export default function Home() {
     hundleFalseIsAddExpPoint
   );
 
-  const {generateMonsterInfo} = useGenerateMonster(useMonsterState.monster, useMonsterState.hundleMonsterImage, useMonsterState.hundleMonsterExpPoint)
+  const { generateMonsterInfo } = useGenerateMonster(
+    useMonsterState.monster,
+    useMonsterState.hundleMonsterImage,
+    useMonsterState.hundleMonsterExpPoint
+  );
 
   const { useTasksState } = useTasks(2, "2024-02-04");
 
@@ -43,8 +65,16 @@ export default function Home() {
         <Calender />
         <Goal />
         <div className="main-tasks-monster-container">
-          <TaskList useTasksState={useTasksState}/>
-          <Monster useMonsterState={useMonsterState} generateMonsterInfo={generateMonsterInfo} />
+          <TaskList
+            useTasksState={useTasksState}
+            animationClass={animationClasses["tasks"]}
+            onClickCompleteTasks={handleClickCompleteButton}
+          />
+          <Monster
+            animationClass={animationClasses["monster"]}
+            useMonsterState={useMonsterState}
+            generateMonsterInfo={generateMonsterInfo}
+          />
         </div>
         <ExpBar
           useMonsterState={useMonsterState}
@@ -55,7 +85,11 @@ export default function Home() {
           hundleTrueIsAddExpPoint={() => hundleTrueIsAddExpPoint()}
         />
         <div className="footer">
-          <Menu onClickAddTaskButton={() => setModalIsOpen(true)} useTasksState={useTasksState} />
+          <Menu
+            onClickAddTaskButton={() => setModalIsOpen(true)}
+            onClickCompleteButton={handleClickCompleteButton}
+            useTasksState={useTasksState}
+          />
         </div>
       </div>
     </div>

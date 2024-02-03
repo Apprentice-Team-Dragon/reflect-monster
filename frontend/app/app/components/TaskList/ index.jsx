@@ -1,18 +1,19 @@
-import React, { useState } from "react";
-import "./style.scss";
+import React from 'react';
+import TaskItem from "./TaskItem";
+import './style.scss';
 import { CircularProgress } from "@mui/material";
 
 // TaskItem コンポーネントの定義
-const TaskItem = ({ key, id, tasks, task, hundleCompletedTasks}) => (
-  <div className="check-container" key={key} onClick={() => hundleCompletedTasks(tasks, id)}>
-    <input type="checkbox" id={id} value={task.isCompleted} checked={task.isCompleted}/>
-    <label htmlFor={id}></label>
-    <span className="tag">{task.content}</span>
-  </div>
-);
+// const TaskItem = ({ key, id, tasks, task, hundleCompletedTasks}) => (
+//   <div {`check-container ${isChecked ? animationClass : ""}`} key={key} onChange={() => hundleCompletedTasks(tasks, id)}>
+//     <input type="checkbox" id={id} value={task.isCompleted} checked={task.isCompleted}/>
+//     <label htmlFor={id}></label>
+//     <span className="tag">{task.content}</span>
+//   </div>
+// );
 
 // TaskList コンポーネントの定義
-const TaskList = ({ useTasksState }) => {
+const TaskList = ({ useTasksState, animationClass }) => {
   const {
     tasks,
     isLoading,
@@ -49,7 +50,7 @@ const TaskList = ({ useTasksState }) => {
     );
   }
 
-  // if (tasks) {
+  if (tasks) {
     const middleIndex = Math.floor(tasks.tasks.length / 2);
     const leftTasks = tasks.tasks.slice(0, middleIndex);
     const rightTasks = tasks.tasks.slice(middleIndex);
@@ -61,7 +62,7 @@ const TaskList = ({ useTasksState }) => {
             <h2>左側のタスクリスト</h2>
             <div className="container">
               {leftTasks.map((task, index) => (
-                <TaskItem key={index} id={index} tasks={tasks} task={task} hundleCompletedTasks={hundleCompletedTasks} />
+                <TaskItem key={index} id={index} tasks={tasks} task={task} hundleCompletedTasks={hundleCompletedTasks} animationClass={animationClass}/>
               ))}
             </div>
           </div>
@@ -77,7 +78,7 @@ const TaskList = ({ useTasksState }) => {
               <h2>右側のタスクリスト</h2>
               <div className="container">
                 {rightTasks.map((task, index) => (
-                  <TaskItem key={index + middleIndex} id={index + middleIndex} tasks={tasks} task={task} hundleCompletedTasks={hundleCompletedTasks} />
+                  <TaskItem key={index + middleIndex} id={index + middleIndex} tasks={tasks} task={task} hundleCompletedTasks={hundleCompletedTasks} animationClass={animationClass} />
                 ))}
               </div>
             </div>
@@ -85,7 +86,7 @@ const TaskList = ({ useTasksState }) => {
         </div>
       </div>
     );
-  // }
+  }
 };
 
 export default TaskList;

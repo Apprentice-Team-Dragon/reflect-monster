@@ -1,4 +1,7 @@
-export default function Menu({ onClickAddTaskButton, useTasksState }) {
+export default function Menu({
+  onClickAddTaskButton,
+  useTasksState,
+}) {
   const {
     tasks,
     isLoading,
@@ -7,8 +10,8 @@ export default function Menu({ onClickAddTaskButton, useTasksState }) {
     hundleCreateTasks,
     hundleUpdateTasks,
     hundleCompletedTasks,
+    hundleRemovedTasks,
   } = useTasksState;
-
   if (tasks) {
     return (
       <div>
@@ -22,7 +25,7 @@ export default function Menu({ onClickAddTaskButton, useTasksState }) {
               <img src="img/taskadd.png" alt="タスク追加" />
               <span>タスク追加</span>
             </li>
-            <li className="menu-item">
+            <li className="menu-item" onClick={() => hundleRemovedTasks(tasks)}>
               <img src="img/taskdone.png" alt="タスク完了" />
               <span>タスク完了</span>
             </li>
