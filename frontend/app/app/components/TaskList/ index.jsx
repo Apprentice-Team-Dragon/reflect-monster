@@ -65,7 +65,8 @@ const TaskList = ({
             <div className="container">
               {leftTasks.map((task, index) => (
                 <TaskItem
-                  key={index}
+                  key={task.id}
+                  itemKey={task.id}
                   id={index}
                   tasks={tasks}
                   task={task}
@@ -89,7 +90,8 @@ const TaskList = ({
               <div className="container">
                 {rightTasks.map((task, index) => (
                   <TaskItem
-                    key={index + middleIndex}
+                    key={task.id + middleIndex}
+                    itemKey={task.id + middleIndex}
                     id={index + middleIndex}
                     tasks={tasks}
                     task={task}
