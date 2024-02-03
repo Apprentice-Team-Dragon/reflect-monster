@@ -24,7 +24,7 @@ export default function Goal() {
   return (
     <div className="mission">
       <div className="mission-contents">
-        <p>{goal?.content}</p>
+        {/* <p>{goal?.content}</p> */}
       </div>
     </div>
   );

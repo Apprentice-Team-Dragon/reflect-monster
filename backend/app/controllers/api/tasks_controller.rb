@@ -3,30 +3,27 @@ class Api::TasksController < ApplicationController
   before_action :set_tasks, only: [:get, :update]
 
   def get
-    render_tasks(@tasks)
+    render json: { tasks: @tasks }, status: 200
   end
 
   def create
-    tasks = create_tasks(@goal_id, params[:tasks])
-    render_tasks(tasks)
+    task = create_task(params[:task])
+    render json: { task: task }, status: 201
   end
 
-  def update
-    tasks = update_tasks(params[:tasks], @tasks)
-    render_tasks(tasks)
-  end
+  # タスクの更新がないので一旦コメントアウト
+  # def update
+  #   task = update_tasks(params[:tasks], @tasks)
+  #   render json: { task: task }, status: 201
+  # end
 
   private
     def set_goal_id
-      @goal_id = params[:goalId]
+      @goal_id = params[:goal_id]
     end
 
     def set_tasks
-      @tasks = Task.where(goal_id: @goal_id, exec_date: params[:execDate])
-    end
-
-    def render_tasks(tasks)
-      render json: { tasks: tasks.map { |ele| ele.generate_response } }
+      @tasks = Task.where(goal_id: @goal_id, exec_date: params[:exec_date])
     end
 
     def create_update_params(task)
@@ -34,12 +31,12 @@ class Api::TasksController < ApplicationController
       transform_camel_to_snake(use_params).permit!
     end
 
-    def create_tasks(goal_id, tasks)
-      tasks.map do |task|
-        new_task = Task.new(goal_id:, content: task[:content], exec_date: task[:execDate])
-        new_task.save
-        new_task
-      end
+    def create_task(task)
+      Task.create(
+        goal_id: @goal_id,
+        content: task["content"],
+        exec_date: task["exec_date"]
+      )
     end
 
     def update_tasks(tasks, base_tasks)

@@ -3,19 +3,21 @@ import TaskItem from "./TaskItem";
 import "./style.scss";
 
 // TaskList コンポーネントの定義
-const TaskList = ({ animationClass }) => {
+const TaskList = ({ tasks, animationClass }) => {
   return (
     <div className="task-list-container">
       <div className="main-content-task-left">
         <div className="left-task-contents">
           <h2>左側のタスクリスト</h2>
           <div className="container">
-            <TaskItem
-              onComplete={null}
-              id="one"
-              label="Choice One"
-              animationClass={animationClass}
-            />
+            {tasks.map((task) => (
+              <TaskItem
+                onComplete={null}
+                id={`task${task.id}`}
+                label={task.content}
+                animationClass={animationClass}
+              />
+            ))}
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Calender from "./components/Calender";
 import Goal from "./components/Goal";
 import TaskList from "./components/TaskList/ index";
@@ -13,6 +13,7 @@ import { useExpPoint } from "@/hooks/MonsterHooks/useExpPoint";
 import { useIsAddExpPoint } from "@/hooks/MonsterHooks/useIsAddExpPoint";
 import { useAddMonsterExpPoint } from "@/hooks/MonsterHooks/useAddMonsterExpPoint";
 import { useGenerateMonster } from "@/hooks/MonsterHooks/useGenerateMonster";
+import { formatDate } from "../utils/dateUtil";
 
 export default function Home() {
   const [isModalOpen, setModalIsOpen] = useState(false);
@@ -22,31 +23,53 @@ export default function Home() {
     monster: "",
   });
 
-  const createTask = async () => {
+  const today = formatDate(new Date());
+
+  const fetchTasks = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/api/tasks`, {
-        method: "POST",
-        body: JSON.stringify({
-          tasks: [
-            {
-              content: "タスク1",
-              execDate: "2024-01-01",
-            },
-            {
-              content: "タスク2",
-              execDate: "2024-01-01",
-            },
-          ],
-        }),
-      });
-      const data = await response.json();
+      const response = await fetch(
+        `http://localhost:3000/api/tasks?goal_id=1&exec_date=${today}`
+      );
+      const { tasks } = await response.json();
+      setTasks(tasks);
     } catch (error) {
       console.error("Error fetching goal:", error);
     }
   };
 
+  const createTask = async (fieldValue) => {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/tasks?goal_id=1`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            task: {
+              content: fieldValue,
+              // 日付選ぶところないから常に今日の日付　YYYY-MM-DD形式で送る
+              exec_date: today,
+            },
+          }),
+        }
+      );
+      const { task } = await response.json();
+      const newTasks = tasks.concat(task);
+
+      setTasks(newTasks);
+      setModalIsOpen(false);
+    } catch (error) {
+      console.error("Error fetching goal:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchTasks();
+  }, []);
+
   function handleClickCompleteButton() {
-    console.log("aaaaaa");
     // ここでAPI呼び出す
 
     setAnimationClasses({
@@ -92,6 +115,7 @@ export default function Home() {
         <div className="main-tasks-monster-container">
           <TaskList
             animationClass={animationClasses["tasks"]}
+            tasks={tasks}
             onClickCompleteTasks={handleClickCompleteButton}
           />
           <Monster
