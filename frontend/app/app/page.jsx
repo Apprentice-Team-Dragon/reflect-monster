@@ -67,6 +67,10 @@ export default function Home() {
       <AddTaskModal
         isModalOpen={isModalOpen}
         onClickCloseButton={() => setModalIsOpen(false)}
+        goalId={goalId}
+        execDate={execDate}
+        tasks={useTasksState.tasks}
+        hundleCreateTasks={useTasksState.hundleCreateTasks}
       />
       <div className="home-container">
         <Calender />

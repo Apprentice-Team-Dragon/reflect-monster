@@ -36,7 +36,7 @@ export function useTasks(goalId, execDate) {
   }, []);
 
   function hundleCreateTasks(task) {
-    setTasks((prevTask) => [...prevTask, task]);
+    setTasks((prevTask) => ({tasks: [...prevTask.tasks, task.tasks[0]]}));
   }
   function hundleUpdateTasks(tasks) {
     setTasks(tasks);
