@@ -56,7 +56,8 @@ export default function Home() {
   const { generateMonsterInfo } = useGenerateMonster(
     useMonsterState.monster,
     useMonsterState.hundleMonsterImage,
-    useMonsterState.hundleMonsterExpPoint
+    useMonsterState.hundleMonsterExpPoint,
+    goalId
   );
 
   const { useTasksState } = useTasks(goalId, execDate);
@@ -80,6 +81,8 @@ export default function Home() {
             useTasksState={useTasksState}
             animationClass={animationClasses["tasks"]}
             onClickCompleteTasks={handleClickCompleteButton}
+            hundleAddExpPoint={() => hundleAddExpPoint()}
+            hundleReduceExpPoint={() => hundleReduceExpPoint()}
           />
           <Monster
             animationClass={animationClasses["monster"]}
@@ -100,6 +103,9 @@ export default function Home() {
             onClickAddTaskButton={() => setModalIsOpen(true)}
             onClickCompleteButton={handleClickCompleteButton}
             useTasksState={useTasksState}
+            useMonsterState={useMonsterState}
+            currentExpPoint={currentExpPoint}
+            hundleTrueIsAddExpPoint={hundleTrueIsAddExpPoint}
           />
         </div>
       </div>

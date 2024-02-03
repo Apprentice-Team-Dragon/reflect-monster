@@ -51,10 +51,11 @@ export async function addExpPoint(monsterId, expPoint) {
 // TODO 卵生成用の関数を作成する
 
 // モンスター進化
-export async function postMonster(monsterId, imagePath) {
+export async function postMonster(monsterId, imagePath, seedValue) {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/monsters?monsterId=${monsterId}`;
   const raw = JSON.stringify({
     image: imagePath,
+    seed: seedValue,
   });
   const config = {
     method: "POST",

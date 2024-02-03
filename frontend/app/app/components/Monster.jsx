@@ -3,7 +3,7 @@ import { CircularProgress, LinearProgress } from "@mui/material";
 
 export default function Monster({useMonsterState, generateMonsterInfo}) {
   const { monster, isLoading, hasError, errorMessage } = useMonsterState;
-  const { isGenerating, haGenerateError } = generateMonsterInfo;
+  const { isGenerating, hasGenerateError } = generateMonsterInfo;
 
   if (isLoading || isGenerating) {
     return (
@@ -34,6 +34,7 @@ export default function Monster({useMonsterState, generateMonsterInfo}) {
           alt="monster_image"
           width={400}
           height={400}
+          priority="high"
         />
       </div>
     );

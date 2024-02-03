@@ -1,6 +1,9 @@
 export default function Menu({
   onClickAddTaskButton,
   useTasksState,
+  useMonsterState,
+  currentExpPoint,
+  hundleTrueIsAddExpPoint,
 }) {
   const {
     tasks,
@@ -12,6 +15,12 @@ export default function Menu({
     hundleCompletedTasks,
     hundleRemovedTasks,
   } = useTasksState;
+  const { hundleMonsterExpPoint } = useMonsterState;
+  const hundleExpPoint = (tasks, currentExpPoint) => {
+    hundleRemovedTasks(tasks)
+    hundleMonsterExpPoint(currentExpPoint);
+    hundleTrueIsAddExpPoint();
+  };
   if (tasks) {
     return (
       <div>
@@ -25,7 +34,7 @@ export default function Menu({
               <img src="img/taskadd.png" alt="タスク追加" />
               <span>タスク追加</span>
             </li>
-            <li className="menu-item" onClick={() => hundleRemovedTasks(tasks)}>
+            <li className="menu-item" onClick={() => hundleExpPoint(tasks, currentExpPoint)}>
               <img src="img/taskdone.png" alt="タスク完了" />
               <span>タスク完了</span>
             </li>
