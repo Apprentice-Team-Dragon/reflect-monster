@@ -55,7 +55,7 @@ export default function Home() {
           hundleTrueIsAddExpPoint={() => hundleTrueIsAddExpPoint()}
         />
         <div className="footer">
-          <Menu onClickAddTaskButton={() => setModalIsOpen(true)} />
+          <Menu onClickAddTaskButton={() => setModalIsOpen(true)} useTasksState={useTasksState} />
         </div>
       </div>
     </div>

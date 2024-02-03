@@ -41,8 +41,15 @@ export function useTasks(goalId, execDate) {
   function hundleUpdateTasks(tasks) {
     setTasks(tasks);
   }
-  function hundleCompletedTasks(task, index) {
-    // setTasks((prevTasks) => ([...prevTasks][index]["isCompleted"]: true))
+  function hundleCompletedTasks(tasks, index) {
+    const updatedTasks = [...tasks.tasks];
+    updatedTasks[index].isCompleted = !updatedTasks[index].isCompleted;
+    setTasks({ tasks: updatedTasks })
+  }
+  function hundleRemovedTasks(tasks, index) {
+    const removedTasks = [...tasks.tasks];
+    removedTasks[index].isCompleted = !removedTasks[index].isCompleted;
+    setTasks({ tasks: removedTasks })
   }
 
   const useTasksState = {
@@ -52,6 +59,7 @@ export function useTasks(goalId, execDate) {
     errorMessage,
     hundleCreateTasks,
     hundleUpdateTasks,
+    hundleCompletedTasks
   };
   return { useTasksState };
 }

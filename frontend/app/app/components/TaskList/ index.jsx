@@ -3,11 +3,11 @@ import "./style.scss";
 import { CircularProgress } from "@mui/material";
 
 // TaskItem コンポーネントの定義
-const TaskItem = ({ id, label, isCompleted, isRemoved }) => (
-  <div className="check-container" key={id}>
-    <input type="checkbox" id={id} value={isCompleted}/>
+const TaskItem = ({ key, id, tasks, task, hundleCompletedTasks}) => (
+  <div className="check-container" key={key} onClick={() => hundleCompletedTasks(tasks, id)}>
+    <input type="checkbox" id={id} value={task.isCompleted} checked={task.isCompleted}/>
     <label htmlFor={id}></label>
-    <span className="tag">{label}</span>
+    <span className="tag">{task.content}</span>
   </div>
 );
 
@@ -20,6 +20,7 @@ const TaskList = ({ useTasksState }) => {
     errorMessage,
     hundleCreateTasks,
     hundleUpdateTasks,
+    hundleCompletedTasks
   } = useTasksState;
 
   if (isLoading) {
@@ -52,16 +53,15 @@ const TaskList = ({ useTasksState }) => {
     const middleIndex = Math.floor(tasks.tasks.length / 2);
     const leftTasks = tasks.tasks.slice(0, middleIndex);
     const rightTasks = tasks.tasks.slice(middleIndex);
-    console.log(leftTasks);
-    console.log(rightTasks);
+
     return (
       <div className="task-list-container">
         <div className="main-content-task-left">
           <div className="left-task-contents">
             <h2>左側のタスクリスト</h2>
             <div className="container">
-              {leftTasks.map((task, id) => (
-                <TaskItem key={id} id={id} label={task.content} />
+              {leftTasks.map((task, index) => (
+                <TaskItem key={index} id={index} tasks={tasks} task={task} hundleCompletedTasks={hundleCompletedTasks} />
               ))}
             </div>
           </div>
@@ -76,8 +76,8 @@ const TaskList = ({ useTasksState }) => {
             <div className="right-task-contents">
               <h2>右側のタスクリスト</h2>
               <div className="container">
-                {rightTasks.map((task, id) => (
-                  <TaskItem key={id} id={id} label={task.content} />
+                {rightTasks.map((task, index) => (
+                  <TaskItem key={index + middleIndex} id={index + middleIndex} tasks={tasks} task={task} hundleCompletedTasks={hundleCompletedTasks} />
                 ))}
               </div>
             </div>
