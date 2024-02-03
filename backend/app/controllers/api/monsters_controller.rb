@@ -57,7 +57,7 @@ class Api::MonstersController < ApplicationController
     end
 
     def set_egg_value(monster)
-      monster.set_random_color.set_random_image.set_random_species.set_max_exp.set_evolution_zero.set_seed_zero
+      monster.set_random_color.set_initial_egg.set_random_species.set_max_exp.set_evolution_zero.set_seed_zero
       monster
     end
 end
