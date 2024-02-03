@@ -13,7 +13,7 @@ const modalStyle = {
   },
 };
 
-export default function AddTaskModal({ isModalOpen, onClickCloseButton }) {
+export default function AddTaskModal({ isModalOpen, onClickCloseButton, onClickCreateButton }) {
   return (
     <Modal isOpen={isModalOpen} style={modalStyle}>
       <Button variant="outlined" onClick={onClickCloseButton}>
@@ -30,7 +30,7 @@ export default function AddTaskModal({ isModalOpen, onClickCloseButton }) {
       <Box textAlign="center" marginTop="32px">
         <Button
           variant="outlined"
-          onClick={() => console.log("aaa")}
+          onClick={onClickCreateButton}
           style={{ width: "60%", padding: "8px 0" }}
         >
           保存

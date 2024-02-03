@@ -1,0 +1,12 @@
+#task {
+  position: absolute;
+  transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+}
+
+.monster-container {
+  transition: transform 0.3s ease; /* 卵のアニメーション */
+}
+
+.bounce {
+  transform: scale(1.1); /* 卵が少し大きくなる */
+}
