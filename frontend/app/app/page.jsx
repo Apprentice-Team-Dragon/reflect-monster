@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import Calender from "./components/Calender";
 import Goal from "./components/Goal";
 import TaskList from "./components/TaskList/ index";
@@ -14,8 +15,13 @@ import { useIsAddExpPoint } from "@/hooks/MonsterHooks/useIsAddExpPoint";
 import { useAddMonsterExpPoint } from "@/hooks/MonsterHooks/useAddMonsterExpPoint";
 import { useGenerateMonster } from "@/hooks/MonsterHooks/useGenerateMonster";
 import { useTasks } from "@/hooks/TaskHooks/useTasks"
+import { useUpdateTasks } from "@/hooks/TaskHooks/useUpdateTasks"
 
 export default function Home() {
+  const searchParams = useSearchParams();
+  const goalId = searchParams.get("goalId");
+  const execDate = searchParams.get("execDate");
+
   const [isModalOpen, setModalIsOpen] = useState(false);
   const [animationClasses, setAnimationClasses] = useState({
     tasks: "",
@@ -53,7 +59,9 @@ export default function Home() {
     useMonsterState.hundleMonsterExpPoint
   );
 
-  const { useTasksState } = useTasks(2, "2024-02-04");
+  const { useTasksState } = useTasks(goalId, execDate);
+  useUpdateTasks(goalId, execDate, useTasksState.tasks, useTasksState.isUpdated, useTasksState.hundleFalseIsUpdated);
+  console.log(useTasksState.isUpdated)
 
   return (
     <div>
@@ -63,7 +71,7 @@ export default function Home() {
       />
       <div className="home-container">
         <Calender />
-        <Goal />
+        <Goal goalId={goalId}/>
         <div className="main-tasks-monster-container">
           <TaskList
             useTasksState={useTasksState}

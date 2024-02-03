@@ -30,9 +30,7 @@ export async function getTasks(goalId, execDate) {
 // タスク更新
 export async function updateTasks(goalId, execDate, tasks) {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/tasks?goalId=${goalId}&execDate=${execDate}`;
-  const raw = JSON.stringify({
-    tasks: tasks
-  });
+  const raw = JSON.stringify({tasks});
   const config = {
     method: "PUT",
     headers: {
@@ -47,9 +45,7 @@ export async function updateTasks(goalId, execDate, tasks) {
 // タスク作成
 export async function createTasks(goalId, tasks) {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/tasks/${goalId}`;
-  const raw = JSON.stringify({
-    tasks: tasks
-  });
+  const raw = JSON.stringify({tasks});
   const config = {
     method: "POST",
     headers: {

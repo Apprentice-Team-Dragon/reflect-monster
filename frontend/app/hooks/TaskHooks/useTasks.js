@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import { getTasks } from "../../utils/api/monsterApi";
+import updateTasks from "../../utils/api/monsterApi";
 
 export function useTasks(goalId, execDate) {
   const [tasks, setTasks] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [isUpdated, setIsUpdated] = useState(false);
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/tasks?goalId=${goalId}&execDate=${execDate}`;
   const config = {
     method: "GET",
@@ -23,7 +24,7 @@ export function useTasks(goalId, execDate) {
           throw new Error(`API error: ${response.status}`);
         }
         const data = await response.json();
-        console.log(data)
+        console.log(data);
         setTasks(data);
       } catch (error) {
         setHasError(true);
@@ -36,7 +37,7 @@ export function useTasks(goalId, execDate) {
   }, []);
 
   function hundleCreateTasks(task) {
-    setTasks((prevTask) => ([ ...prevTask, task ]));
+    setTasks((prevTask) => [...prevTask, task]);
   }
   function hundleUpdateTasks(tasks) {
     setTasks(tasks);
@@ -44,17 +45,22 @@ export function useTasks(goalId, execDate) {
   function hundleCompletedTasks(tasks, index) {
     const updatedTasks = [...tasks.tasks];
     updatedTasks[index].isCompleted = !updatedTasks[index].isCompleted;
-    setTasks({ tasks: updatedTasks })
+    setTasks({ tasks: updatedTasks });
   }
-  function hundleRemovedTasks(tasks) {
+
+  async function hundleRemovedTasks(tasks) {
     const removedTasks = [...tasks.tasks];
     for (let index = 0; index < removedTasks.length; index++) {
-      if(removedTasks[index].isCompleted) {
+      if (removedTasks[index].isCompleted) {
         removedTasks[index].isRemoved = true;
       }
-      
     }
-    setTasks({ tasks: removedTasks })
+    setTasks({ tasks: removedTasks });
+    setIsUpdated(true);
+  }
+
+  function hundleFalseIsUpdated() {
+    setIsUpdated(false);
   }
 
   const useTasksState = {
@@ -65,7 +71,9 @@ export function useTasks(goalId, execDate) {
     hundleCreateTasks,
     hundleUpdateTasks,
     hundleCompletedTasks,
-    hundleRemovedTasks
+    hundleRemovedTasks,
+    isUpdated,
+    hundleFalseIsUpdated
   };
   return { useTasksState };
 }
