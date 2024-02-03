@@ -8,10 +8,10 @@ export default function Goal() {
     const getGoal = async () => {
       try {
         const goalContent = await fetch(
-          `http://localhost:3000/api/goals/1/contents`
+          `http://localhost:3000/api/goals/8/contents`
         );
         const data = await goalContent.json();
-        setGoal(data.goal);
+        setGoal(data);
       } catch (error) {
         console.error("Error fetching goal:", error);
       }
