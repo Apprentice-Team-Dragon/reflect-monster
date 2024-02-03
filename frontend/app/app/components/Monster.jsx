@@ -1,16 +1,24 @@
 import Image from "next/image";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, LinearProgress } from "@mui/material";
 
-export default function Monster({useMonsterState}) {
+export default function Monster({useMonsterState, generateMonsterInfo}) {
   const { monster, isLoading, hasError, errorMessage } = useMonsterState;
+  const { isGenerating, haGenerateError } = generateMonsterInfo;
 
-  if (isLoading) {
+  if (isLoading || isGenerating) {
     return (
       <div className="monster-container">
         <CircularProgress />
       </div>
     );
   }
+  // if (isGenerating) {
+  //   return (
+  //     <div className="monster-container">
+  //       <LinearProgress />
+  //     </div>
+  //   );
+  // }
   if (hasError) {
     return (
       <div className="monster-container">

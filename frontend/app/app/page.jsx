@@ -28,6 +28,8 @@ export default function Home() {
     hundleFalseIsAddExpPoint
   );
 
+  const {generateMonsterInfo} = useGenerateMonster(useMonsterState.monster, useMonsterState.hundleMonsterImage, useMonsterState.hundleMonsterExpPoint)
+
   return (
     <div>
       <AddTaskModal
@@ -39,7 +41,7 @@ export default function Home() {
         <Goal />
         <div className="main-tasks-monster-container">
           <TaskList />
-          <Monster useMonsterState={useMonsterState} />
+          <Monster useMonsterState={useMonsterState} generateMonsterInfo={generateMonsterInfo} />
         </div>
         <ExpBar
           useMonsterState={useMonsterState}

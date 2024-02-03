@@ -61,7 +61,7 @@ async function getGoalCategory(texts) {
   const config = {
     method: "POST",
     headers: {
-      Authorization: "Token " + process.env.NLPCLOUD_API_KEY,
+      Authorization: "Token " + process.env.NEXT_PUBLIC_NLPCLOUD_API_KEY,
       "Content-Type": "application/json",
     },
     body: raw,
@@ -88,7 +88,7 @@ async function generateMonsterImage(label, animal, color, seed) {
   const config = {
     method: "POST",
     headers: {
-      Authorization: "Bearer " + process.env.STABILITY_API_KEY,
+      Authorization: "Bearer " + process.env.NEXT_PUBLIC_STABILITY_API_KEY,
       "Content-Type": "application/json",
     },
     body: raw,
@@ -106,7 +106,7 @@ async function removeBackground(base64Image) {
     method: "POST",
     headers: {
       accept: "application/json",
-      "X-API-Key": process.env.REMOVEBG_API_KEY,
+      "X-API-Key": process.env.NEXT_PUBLIC_REMOVEBG_API_KEY,
       "Content-Type": "application/json",
     },
     body: raw,
@@ -117,8 +117,8 @@ async function removeBackground(base64Image) {
 
 // 画像をsupabaseへアップロード
 async function uploadImage(base64Image) {
-  const supabaseUrl = process.env.SUPABASE_URL;
-  const supabaseKey = process.env.SUPABASE_KEY;
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY;
   const supabase = createClient(supabaseUrl, supabaseKey);
   const timestamp = new Date().getTime();
   const uniqueIdentifier = Math.random().toString(36).substring(2, 9);
@@ -145,53 +145,12 @@ async function uploadImage(base64Image) {
   }
 }
 
-// 目標のテキストを取得
-// TODO Taskのcontentも取得する
-async function getGoalText(goalId) {
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/goals/${goalId}`;
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-  const data = await fetchFunction(url, config);
-  return data.goal.content;
-}
-
-
-// TODO 卵生成用の関数を作成する
-
-// モンスター進化
-async function postMonster(monsterId, imagePath) {
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/monsters?monsterId=${monsterId}`;
-  const raw = JSON.stringify({
-    image: imagePath,
-  });
-  const config = {
-    method: "POST",
-    headers: {
-      accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: raw,
-  };
-  const data = await fetchFunction(url, config);
-  return data;
-}
-
-// TODO 引数をgoalIdにする → generateMonster(goalId, monsterInfo)
 // モンスター生成の一連の処理 monster objectを返す
-export async function generateMonster(goalId, monsterInfo) {
-  const text = await getGoalText(goalId);
-  // const text = goalText;
-  const evolutionStage = monsterInfo.evolutionStage;
-  const animal = monsterInfo.animal;
-  const color = monsterInfo.color;
-  const seed = monsterInfo.seed;
+export async function generateMonster(goalContent, {evolution_stage, animal, color, seed} = monster) {
 
   let topLabel = "base";
-  if (evolutionStage === 1) {
-    const categoryData = await getGoalCategory(text);
+  if (evolution_stage === 1) {
+    const categoryData = await getGoalCategory(goalContent);
     const labelArray = categoryData.labels.map((label, index) => ({
       label: label,
       score: categoryData.scores[index],
@@ -199,7 +158,7 @@ export async function generateMonster(goalId, monsterInfo) {
     topLabel = labelArray.sort((a, b) => (a.score > b.score ? -1 : 1))[0][
       "label"
     ];
-  } else if (evolutionStage > 2) {
+  } else if (evolution_stage > 2) {
     throw new Error("evolutionStage only accept 0 or 1");
   }
 
@@ -210,29 +169,14 @@ export async function generateMonster(goalId, monsterInfo) {
     seed
   );
   const seedValue = monsterImageBase64.artifacts[0].seed;
-  const removeBackgroundData = await removeBackground(
-    monsterImageBase64.artifacts[0].base64
-  );
-  const monsterImage = removeBackgroundData.data.result_b64;
-  const imagePath = await uploadImage(monsterImage);
-  const monsterImagePath = await postMonster(monsterId, imagePath);
-  // return monsterImagePath.monster
+  const generatedImage = monsterImageBase64.artifacts[0].base64;
 
-  return monsterImagePath;
-}
+  //TODO 画像背景透過処理 本番では動作させる
+  // const removeBackgroundData = await removeBackground(generatedImage);
+  // const removeBackgroundImage = removeBackgroundData.data.result_b64;
+  // const imagePath = await uploadImage(removeBackgroundImage);
 
-export async function getCredit() {
-  const url =
-    "https://api.stability.ai/v1/user/balance";
-  const config = {
-    method: "GET",
-    headers: {
-      Authorization: "Bearer " + process.env.STABILITY_API_KEY,
-      "Content-Type": "application/json",
-    },
-  };
-  const data = await fetchFunction(url, config);
-  console.log(data)
+  const imagePath = await uploadImage(generatedImage);
 
-  return data;
+  return { imagePath, seed };
 }

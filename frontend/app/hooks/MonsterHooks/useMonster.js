@@ -42,7 +42,6 @@ export function useMonster() {
       ...prevMonster,
       exp_point: monsterExpPoint,
     }));
-    console.log(monster);
   }
 
   const useMonsterState = {

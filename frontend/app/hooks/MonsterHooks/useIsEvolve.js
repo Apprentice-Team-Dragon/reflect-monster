@@ -1,20 +1,16 @@
 import { useState, useEffect } from "react";
 
-export function useIsEvolve(expPoint, maxExpPoint) {
+export function useIsEvolve() {
   const [isEvolve, setIsEvolve] = useState(false);
   useEffect(() => {
-    function hundleIsEvolve() {
+    function hundleTrueIsEvolve() {
       setIsEvolve(true);
     }
-    function hundleNotIsEvolve() {
+    function hundleFalseIsEvolve() {
       setIsEvolve(false);
     }
-    if (expPoint >= maxExpPoint) {
-      hundleIsEvolve();
-    } else {
-      hundleNotIsEvolve();
-    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [expPoint, maxExpPoint]);
-  return { isEvolve };
+  }, []);
+  return { isEvolve, hundleTrueIsEvolve, hundleFalseIsEvolve };
 }
