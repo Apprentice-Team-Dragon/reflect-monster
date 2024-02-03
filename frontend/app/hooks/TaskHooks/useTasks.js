@@ -24,7 +24,6 @@ export function useTasks(goalId, execDate) {
           throw new Error(`API error: ${response.status}`);
         }
         const data = await response.json();
-        console.log(data);
         setTasks(data);
       } catch (error) {
         setHasError(true);
