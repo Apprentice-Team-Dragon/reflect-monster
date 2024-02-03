@@ -9,7 +9,8 @@ class Task < ApplicationRecord
       id: self.id,
       content: self.content,
       isCompleted: self.is_completed,
-      exec_date: self.exec_date
+      exec_date: self.exec_date,
+      isRemoved: self.is_removed
     }
 
     response

@@ -11,7 +11,7 @@ html {
 }
 
 .calendar-contents {
-  width: 200px;
+  width: 240px;
   display: flex;
   align-items: center;
   margin-top: 20px;
@@ -68,23 +68,34 @@ body {
   text-align: center;
   width: 500px;
   height: 500px;
-  background-color: #d9d9d9;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: absolute;
+  /* top: 201px; */
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* タスク一覧 */
 .main-tasks-monster-container {
+  position: relative  ;
+}
+.task-list-container {
+  width: 100%; /* タスクリスト全体の幅を100%に設定 */
   display: flex;
-  justify-content: center;
+  flex-direction: row; /* タスクリストを横並びに配置 */
+  justify-content: space-between; /* 左右に均等に配置 */
+  margin: 0 auto; /* 左右の余白を自動で均等に設定 */
+  max-width: 1200px; /* 最大幅を設定（必要に応じて調整） */
 }
 
-.task-list-container {
-  width: 400px;
-  display: flex;
-  flex-direction: column;
-  margin: 0 50px;
+.left-task-contents,
+.right-task-contents {
+  flex: 1; /* 左右のタスクリストを均等に伸縮させる */
 }
 
 .task-list {
@@ -96,7 +107,7 @@ body {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
-  padding: 0 80px;
+  padding: 0 20px; /* 左右の余白を調整 */
 }
 
 .task-checkbox {
@@ -110,6 +121,14 @@ body {
   font-size: 18px;
 }
 
+.transparent-box {
+  width: 500px; /* 透明な箱の幅を設定 */
+  height: 500px; /* 透明な箱の高さを設定 */
+  background-color: transparent; /* 透明な背景 */
+  margin: 0 auto; /* 水平中央配置 */
+  margin-top: 24px; /* 上部マージンを設定 */
+}
+
 .exp-container {
   display: flex;
   flex-direction: column;
@@ -118,6 +137,7 @@ body {
   margin: auto;
   margin-top: 24px;
 }
+
 
 .exp-bar {
   width: 500px;
@@ -170,4 +190,42 @@ body {
   width: 50px;
   height: 50px;
   margin-bottom: 5px;
+}
+
+.menu-item:hover {
+  background-color: #ececec; /* ここに好きな色を指定 */
+  cursor: pointer; /* オプショナル：マウスカーソルをポインターに変更 */
+}
+
+.menu-item:hover img {
+  /* 画像に対する追加のスタイルがあればここに記述 */
+}
+
+.menu-item:hover span {
+  color: #333333; /* 文字色の変更 */
+}
+
+
+.btn {
+  position: relative; /* static以外を指定 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 60px;
+  border-radius: 100px;
+  background-color: #6cc7f4;
+  color: #fff;
+  font-family: "Signika";
+  font-size: 1.2em;
+  font-weight: bold;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+/* ボタンホバー時 */
+.btn:hover {
+  background-color: #fff;
+  color: #6cc7f4;
+  box-shadow: 0 0 20px 0 rgba(108, 199, 244, 0.5);
 }

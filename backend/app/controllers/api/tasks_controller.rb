@@ -30,12 +30,8 @@ class Api::TasksController < ApplicationController
     end
 
     def create_update_params(task)
-      res = {}
-      res[:content] = task[:content] if task[:content]
-      res[:is_completed] = task[:isCompleted] if task[:isCompleted]
-      res[:is_removed] = task[:isRemoved] if task[:isRemoved]
-
-      res
+      use_params = task.slice(:content, :isCompleted, :isRemoved)
+      transform_camel_to_snake(use_params).permit!
     end
 
     def create_tasks(goal_id, tasks)

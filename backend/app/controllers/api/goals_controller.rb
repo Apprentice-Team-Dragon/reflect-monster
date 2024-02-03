@@ -1,7 +1,7 @@
 class Api::GoalsController < ApplicationController
-  before_action :set_goal, only: [:get, :update]
+  before_action :set_goal, only: [:get, :update, :content]
   def get
-    render json: { goal: goal_response(@goal) }
+    render json: { goal: @goal.generate_response }
   end
 
   def create
@@ -22,13 +22,15 @@ class Api::GoalsController < ApplicationController
     end
   end
 
+  def content
+    tasks = Task.where(goal_id: @goal[:id])
+
+    render json: { content: combined_task_and_goal_content(@goal, tasks) }
+  end
+
   private
     def set_goal
       @goal = Goal.find(params[:id])
-    end
-
-    def goal_response(goal = nil)
-      { id: goal&.id, content: goal&.content, isCompleted: goal&.is_completed }
     end
 
     def get_content_params
@@ -37,5 +39,10 @@ class Api::GoalsController < ApplicationController
 
     def put_params
       params.require(:goal).permit(:content, :isCompleted)
+    end
+
+    def combined_task_and_goal_content(goal, tasks)
+      contents = tasks.reduce([goal[:content]]) { |result, task| result.push(task[:content]) }
+      contents.join(" ")
     end
 end
