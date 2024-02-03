@@ -1,11 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
-export default function Goal() {
+export default function Goal({goalId}) {
   const [goal, setGoal] = useState(null);
 
   useEffect(() => {
-    const goalId = "1"; // ここで取得したい目標のIDを設定します
     const url = `http://localhost:3000/api/goals/${goalId}`; // URL内の{id}を実際のIDで置き換え
 
     const getGoal = async () => {

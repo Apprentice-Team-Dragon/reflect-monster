@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import Calender from "./components/Calender";
 import Goal from "./components/Goal";
 import TaskList from "./components/TaskList/ index";
@@ -13,42 +14,21 @@ import { useExpPoint } from "@/hooks/MonsterHooks/useExpPoint";
 import { useIsAddExpPoint } from "@/hooks/MonsterHooks/useIsAddExpPoint";
 import { useAddMonsterExpPoint } from "@/hooks/MonsterHooks/useAddMonsterExpPoint";
 import { useGenerateMonster } from "@/hooks/MonsterHooks/useGenerateMonster";
+import { useTasks } from "@/hooks/TaskHooks/useTasks"
+import { useUpdateTasks } from "@/hooks/TaskHooks/useUpdateTasks"
 
 export default function Home() {
+  const searchParams = useSearchParams();
+  const goalId = searchParams.get("goalId");
+  const execDate = searchParams.get("execDate");
+
   const [isModalOpen, setModalIsOpen] = useState(false);
-  const [tasks, setTasks] = useState([]);
   const [animationClasses, setAnimationClasses] = useState({
     tasks: "",
     monster: "",
   });
 
-  const createTask = async () => {
-    try {
-      const response = await fetch(`http://localhost:3000/api/tasks`, {
-        method: "POST",
-        body: JSON.stringify({
-          tasks: [
-            {
-              content: "タスク1",
-              execDate: "2024-01-01",
-            },
-            {
-              content: "タスク2",
-              execDate: "2024-01-01",
-            },
-          ],
-        }),
-      });
-      const data = await response.json();
-    } catch (error) {
-      console.error("Error fetching goal:", error);
-    }
-  };
-
   function handleClickCompleteButton() {
-    console.log("aaaaaa");
-    // ここでAPI呼び出す
-
     setAnimationClasses({
       tasks: "moveToEgg",
       monster: "bounce",
@@ -79,18 +59,25 @@ export default function Home() {
     useMonsterState.hundleMonsterExpPoint
   );
 
+  const { useTasksState } = useTasks(goalId, execDate);
+  useUpdateTasks(goalId, execDate, useTasksState.tasks, useTasksState.isUpdated, useTasksState.hundleFalseIsUpdated);
+
   return (
     <div>
       <AddTaskModal
         isModalOpen={isModalOpen}
-        onClickCreateButton={createTask}
         onClickCloseButton={() => setModalIsOpen(false)}
+        goalId={goalId}
+        execDate={execDate}
+        tasks={useTasksState.tasks}
+        hundleCreateTasks={useTasksState.hundleCreateTasks}
       />
       <div className="home-container">
         <Calender />
-        <Goal />
+        <Goal goalId={goalId}/>
         <div className="main-tasks-monster-container">
           <TaskList
+            useTasksState={useTasksState}
             animationClass={animationClasses["tasks"]}
             onClickCompleteTasks={handleClickCompleteButton}
           />
@@ -110,8 +97,9 @@ export default function Home() {
         />
         <div className="footer">
           <Menu
-            onClickCompleteButton={handleClickCompleteButton}
             onClickAddTaskButton={() => setModalIsOpen(true)}
+            onClickCompleteButton={handleClickCompleteButton}
+            useTasksState={useTasksState}
           />
         </div>
       </div>
