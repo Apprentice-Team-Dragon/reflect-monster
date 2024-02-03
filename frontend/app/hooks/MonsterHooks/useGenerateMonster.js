@@ -30,7 +30,7 @@ export function useGenerateMonster(
         setIsGenerating(false);
       }
     };
-    if (monster.exp_point >= monster.max_exp_point && monster.evolution_satage !== 2) {
+    if (monster.exp_point >= monster.max_exp_point && monster.evolution_stage !== 2) {
       console.log(`id=${monster.id}のモンスターを進化します`);
       hundleGenerateMonster();
     }
