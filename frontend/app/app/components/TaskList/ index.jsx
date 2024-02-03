@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 import TaskItem from "./TaskItem";
-import './style.scss';
+import "./style.scss";
 import { CircularProgress } from "@mui/material";
 
 // TaskItem コンポーネントの定義
@@ -13,7 +13,12 @@ import { CircularProgress } from "@mui/material";
 // );
 
 // TaskList コンポーネントの定義
-const TaskList = ({ useTasksState, animationClass }) => {
+const TaskList = ({
+  useTasksState,
+  animationClass,
+  hundleAddExpPoint,
+  hundleReduceExpPoint,
+}) => {
   const {
     tasks,
     isLoading,
@@ -21,7 +26,7 @@ const TaskList = ({ useTasksState, animationClass }) => {
     errorMessage,
     hundleCreateTasks,
     hundleUpdateTasks,
-    hundleCompletedTasks
+    hundleCompletedTasks,
   } = useTasksState;
 
   if (isLoading) {
@@ -29,7 +34,6 @@ const TaskList = ({ useTasksState, animationClass }) => {
       <div className="task-list-container">
         <div className="main-content-task-left">
           <div className="left-task-contents">
-            <h2>左側のタスクリスト</h2>
             <div className="container">
               <CircularProgress />
             </div>
@@ -40,7 +44,6 @@ const TaskList = ({ useTasksState, animationClass }) => {
         </div>
         <div className="main-content-task-right">
           <div className="right-task-contents">
-            <h2>右側のタスクリスト</h2>
             <div className="container">
               <CircularProgress />
             </div>
@@ -59,10 +62,18 @@ const TaskList = ({ useTasksState, animationClass }) => {
       <div className="task-list-container">
         <div className="main-content-task-left">
           <div className="left-task-contents">
-            <h2>左側のタスクリスト</h2>
             <div className="container">
               {leftTasks.map((task, index) => (
-                <TaskItem key={index} id={index} tasks={tasks} task={task} hundleCompletedTasks={hundleCompletedTasks} animationClass={animationClass}/>
+                <TaskItem
+                  key={index}
+                  id={index}
+                  tasks={tasks}
+                  task={task}
+                  hundleCompletedTasks={hundleCompletedTasks}
+                  animationClass={animationClass}
+                  hundleAddExpPoint={hundleAddExpPoint}
+                  hundleReduceExpPoint={hundleReduceExpPoint}
+                />
               ))}
             </div>
           </div>
@@ -75,10 +86,18 @@ const TaskList = ({ useTasksState, animationClass }) => {
             <CircularProgress />
           ) : (
             <div className="right-task-contents">
-              <h2>右側のタスクリスト</h2>
               <div className="container">
                 {rightTasks.map((task, index) => (
-                  <TaskItem key={index + middleIndex} id={index + middleIndex} tasks={tasks} task={task} hundleCompletedTasks={hundleCompletedTasks} animationClass={animationClass} />
+                  <TaskItem
+                    key={index + middleIndex}
+                    id={index + middleIndex}
+                    tasks={tasks}
+                    task={task}
+                    hundleCompletedTasks={hundleCompletedTasks}
+                    animationClass={animationClass}
+                    hundleAddExpPoint={hundleAddExpPoint}
+                    hundleReduceExpPoint={hundleReduceExpPoint}
+                  />
                 ))}
               </div>
             </div>

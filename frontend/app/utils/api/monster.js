@@ -148,22 +148,22 @@ async function uploadImage(base64Image) {
 // モンスター生成の一連の処理 monster objectを返す
 export async function generateMonster(goalContent, {evolution_stage, animal, color, seed} = monster) {
 
-  let topLabel = "base";
-  if (evolution_stage === 1) {
-    const categoryData = await getGoalCategory(goalContent);
-    const labelArray = categoryData.labels.map((label, index) => ({
-      label: label,
-      score: categoryData.scores[index],
-    }));
-    topLabel = labelArray.sort((a, b) => (a.score > b.score ? -1 : 1))[0][
-      "label"
-    ];
-  } else if (evolution_stage > 2) {
-    throw new Error("evolutionStage only accept 0 or 1");
-  }
+  // let topLabel = "base";
+  // if (evolution_stage === 1) {
+  //   const categoryData = await getGoalCategory(goalContent);
+  //   const labelArray = categoryData.labels.map((label, index) => ({
+  //     label: label,
+  //     score: categoryData.scores[index],
+  //   }));
+  //   topLabel = labelArray.sort((a, b) => (a.score > b.score ? -1 : 1))[0][
+  //     "label"
+  //   ];
+  // } else if (evolution_stage > 2) {
+  //   throw new Error("evolutionStage only accept 0 or 1");
+  // }
 
   const monsterImageBase64 = await generateMonsterImage(
-    topLabel,
+    "sports",
     animal,
     color,
     seed
@@ -172,11 +172,11 @@ export async function generateMonster(goalContent, {evolution_stage, animal, col
   const generatedImage = monsterImageBase64.artifacts[0].base64;
 
   //TODO 画像背景透過処理 本番では動作させる
-  // const removeBackgroundData = await removeBackground(generatedImage);
-  // const removeBackgroundImage = removeBackgroundData.data.result_b64;
-  // const imagePath = await uploadImage(removeBackgroundImage);
+  const removeBackgroundData = await removeBackground(generatedImage);
+  const removeBackgroundImage = removeBackgroundData.data.result_b64;
+  const imagePath = await uploadImage(removeBackgroundImage);
 
-  const imagePath = await uploadImage(generatedImage);
+  // const imagePath = await uploadImage(generatedImage);
 
   return { imagePath, seedValue };
 }
