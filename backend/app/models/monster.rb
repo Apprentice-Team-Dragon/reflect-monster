@@ -61,9 +61,12 @@ class Monster < ApplicationRecord
   def set_evolution(prev_monster)
     self.species = prev_monster.species
     self.color = prev_monster.color
-    self.seed = prev_monster.seed
     self.evolution_stage = prev_monster.evolution_stage + 1
 
     self
+  end
+
+  def set_seed_prev_monster(prev_monster)
+    self.seed = prev_monster.seed
   end
 end

@@ -13,6 +13,9 @@ class Api::MonstersController < ApplicationController
       prev_monster = Monster.find(params[:monsterId])
       prev_monster.update(is_selected: false)
       monster.set_evolution(prev_monster)
+      if monster.evolution_stage == 2
+        monster.set_seed_prev_monster(prev_monster)
+      end
     # 卵を生成する場合
     else
       set_egg_value(monster)
@@ -45,7 +48,7 @@ class Api::MonstersController < ApplicationController
     end
 
     def create_params
-      params.require(:monster).permit(:image)
+      params.require(:monster).permit(:image, :seed)
     end
     def update_params
       res = params.require(:monster).permit(:expPoint)
