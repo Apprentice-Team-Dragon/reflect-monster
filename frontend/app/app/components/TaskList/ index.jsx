@@ -1,42 +1,21 @@
-import React, { useState } from 'react';
-import './style.scss';
-
-const TaskItem = ({ id, label }) => {
-  // チェックされているかの状態を管理するためのuseStateフック
-  const [isChecked, setIsChecked] = useState(false);
-
-  // チェックボックスの変更をハンドルし、状態変更をログに出力する関数
-  const handleCheckboxChange = () => {
-    const newCheckedState = !isChecked;
-    setIsChecked(newCheckedState); // 状態を更新
-    // チェックボックスの新しい状態をコンソールにログ出力
-    console.log(`タスク ${id} は ${newCheckedState ? "チェックされました" : "チェックが外されました"}`);
-  };
-
-  return (
-    <div className="check-container">
-      <input
-        type="checkbox"
-        id={id}
-        checked={isChecked}
-        onChange={handleCheckboxChange}
-      />
-      <label htmlFor={id}></label>
-      <span className="tag">{label}</span>
-    </div>
-  );
-};
-
+import React, { useState } from "react";
+import TaskItem from "./TaskItem";
+import "./style.scss";
 
 // TaskList コンポーネントの定義
-const TaskList = () => {
+const TaskList = ({ animationClass }) => {
   return (
     <div className="task-list-container">
       <div className="main-content-task-left">
         <div className="left-task-contents">
           <h2>左側のタスクリスト</h2>
           <div className="container">
-            <TaskItem id="one" label="Choice One" />
+            <TaskItem
+              onComplete={null}
+              id="one"
+              label="Choice One"
+              animationClass={animationClass}
+            />
           </div>
         </div>
       </div>
@@ -55,6 +34,6 @@ const TaskList = () => {
       </div>
     </div>
   );
-}
+};
 
 export default TaskList;

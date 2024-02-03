@@ -1,4 +1,4 @@
-export default function Menu({ onClickAddTaskButton }) {
+export default function Menu({ onClickAddTaskButton, onClickCompleteButton }) {
   return (
     <div>
       <div className="menu-container">
@@ -11,7 +11,7 @@ export default function Menu({ onClickAddTaskButton }) {
             <img src="img/taskadd.png" alt="タスク追加" />
             <span>タスク追加</span>
           </li>
-          <li className="menu-item">
+          <li className="menu-item" onClick={onClickCompleteButton}>
             <img src="img/taskdone.png" alt="タスク完了" />
             <span>タスク完了</span>
           </li>
