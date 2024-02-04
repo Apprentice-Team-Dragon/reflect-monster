@@ -162,8 +162,17 @@ export async function generateMonster(goalContent, {evolution_stage, animal, col
   //   throw new Error("evolutionStage only accept 0 or 1");
   // }
 
+  let topLabel = "";
+  if (evolution_stage === 0) {
+  topLabel = "base";
+  } else if (evolution_stage === 1) {
+    topLabel = "sports"
+  } else if (evolution_stage >= 2) {
+    throw new Error("evolutionStage only accept 0 or 1");
+  }
+
   const monsterImageBase64 = await generateMonsterImage(
-    "sports",
+    topLabel,
     animal,
     color,
     seed
