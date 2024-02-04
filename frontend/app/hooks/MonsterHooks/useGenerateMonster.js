@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { generateMonster } from "../../utils/api/monster";
-import { getGoalText, postMonster } from "../../utils/api/monsterApi";
+import { getGoalText, getMonster, postMonster } from "../../utils/api/monsterApi";
 
 export function useGenerateMonster(
   monster,
@@ -16,12 +16,14 @@ export function useGenerateMonster(
       // TODO ここで、モンスターの経験値をデータベースに保存 DBの値を使って進化できるか判定する
       setIsGenerating(true);
       try {
+        const monster = await getMonster();
         const goalContent = await getGoalText(goalId);
         const { imagePath, seedValue } = await generateMonster(goalContent, monster);
 
         hundleMonsterImage(imagePath);
         hundleMonsterExpPoint(0);
         postMonster(monster.id, imagePath, seedValue);
+        // ここでseed値をmonster stateに入れる必要がある
         console.log(seedValue);
 
       } catch (error) {
