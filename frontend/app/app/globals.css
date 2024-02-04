@@ -4,10 +4,22 @@ html {
   margin: 0;
 }
 
+.logo{
+  position: absolute;
+  top: 10px;
+  left: 300px;
+}
+
+.logo img {
+  max-width: 100%; /* 最大幅をコンテナの100%に設定 */
+  height: 91px;    /* 高さは自動調整 */
+}
+
 /* カレンダー */
 .calendar-container {
   display: flex;
   justify-content: center;
+  
 }
 
 .calendar-contents {
@@ -15,9 +27,10 @@ html {
   display: flex;
   align-items: center;
   margin-top: 20px;
-  background-color: #d9d9d9;
+  background-color: #F5F8F7;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
+  box-shadow: 3px 3px 15px -5px #b7b7b7;
 }
 
 .calendar-date {
@@ -28,7 +41,6 @@ html {
 
 /* メインコンテンツ */
 body {
-  font-family: "Kiwi Maru", sans-serif;
   margin: 0;
   padding: 0;
   height: 100%;
@@ -46,15 +58,28 @@ body {
   align-items: center;
 }
 
-.mission-contents {
+.mission-contents p{
+  width: 500px;
+  height: 50px;
+  background-color: #F5F8F7;
   text-align: center;
-  flex: 1;
-  padding: 16px 10px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin-top: 20px;
+  position: absolute;
+  right: 432px;
+  border-radius: 50px;
+  top: 11%;
+  left: 50%;
+  transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  box-shadow: 3px 3px 15px -5px #b7b7b7;
 }
+
+.mission-goal{
+  position: absolute;
+    top: 9%;
+    left: 37%;
+}
+
+
 
 /* 生成画像表示部分 */
 .main-contents {
@@ -72,12 +97,16 @@ body {
   align-items: center;
   justify-content: center;
   position: absolute;
-  /* top: 201px; */
+  margin-top: 50px;
   bottom: 0;
   right: 0;
   left: 0;
   margin-left: auto;
   margin-right: auto;
+}
+
+.monster-container img {
+  margin-top: 66px;
 }
 
 /* タスク一覧 */
@@ -96,7 +125,22 @@ body {
 .left-task-contents,
 .right-task-contents {
   flex: 1; /* 左右のタスクリストを均等に伸縮させる */
+
 }
+
+.left-task-contents{
+  margin-top: 200px;
+  margin-left: 60px;
+  font-size: 24px;
+}
+
+.right-task-contents{
+  margin-top: 200px;
+  margin-right: 60px;
+  font-size: 24px;
+}
+
+
 
 .task-list {
   list-style: none;
@@ -154,17 +198,19 @@ body {
 
 /* フッター */
 .footer {
-  width: 100%;
+  width: 1000px;
+  height: 130px;
   padding: 8px 0;
-  background-color: #d9d9d9;
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
+  border-radius: 20px;
+  margin-right: auto;
+  margin-left : auto;
 }
 
 .menu-container {
-  width: 60%;
   margin: auto;
 }
 
@@ -176,6 +222,9 @@ body {
   justify-content: space-around; /* アイテム間に等間隔を設ける */
   align-items: center;
   margin: 0; /* デフォルトのマージンをリセット */
+  background-color: #F5F8F7;
+  border-radius: 40px;
+  box-shadow: 3px 3px 15px -5px #b7b7b7;
 }
 
 .menu-item {

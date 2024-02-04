@@ -65,6 +65,9 @@ export default function Home() {
 
   return (
     <div>
+      <div className="logo">
+        <img src="img/refmon_logo.png" alt="" />
+        </div>
       <AddTaskModal
         isModalOpen={isModalOpen}
         onClickCloseButton={() => setModalIsOpen(false)}
