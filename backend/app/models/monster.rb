@@ -20,6 +20,11 @@ class Monster < ApplicationRecord
     self
   end
 
+  def set_initial_egg
+    self.image = "firstegg.png"
+    self
+  end
+
   def set_random_image
     egg_images = %w(egg1 egg2 egg3 egg4 egg5 egg6)
 
