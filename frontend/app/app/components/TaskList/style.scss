@@ -88,12 +88,13 @@ input[type="checkbox"]:checked + label:before {
 }
 
 .left-moveToEgg {
-  transform: translate(100px, 100px) scale(0);
+  transform: translate(200px, 200px) scale(0);
   opacity: 0;
   transition: 0.3s;
 }
 .right-moveToEgg {
-  transform: translate(-100px, -100px) scale(0);
+  transform: translate(-200px,200px) scale(0);
   opacity: 0;
   transition: 0.3s;
 }
+
