@@ -71,7 +71,7 @@ const TaskList = ({
                   tasks={tasks}
                   task={task}
                   hundleCompletedTasks={hundleCompletedTasks}
-                  animationClass={animationClass}
+                  position="left"
                   hundleAddExpPoint={hundleAddExpPoint}
                   hundleReduceExpPoint={hundleReduceExpPoint}
                 />
@@ -96,7 +96,7 @@ const TaskList = ({
                     tasks={tasks}
                     task={task}
                     hundleCompletedTasks={hundleCompletedTasks}
-                    animationClass={animationClass}
+                    position="right"
                     hundleAddExpPoint={hundleAddExpPoint}
                     hundleReduceExpPoint={hundleReduceExpPoint}
                   />

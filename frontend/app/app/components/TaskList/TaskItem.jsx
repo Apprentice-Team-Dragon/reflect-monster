@@ -8,6 +8,7 @@ const TaskItem = ({
   hundleCompletedTasks,
   hundleAddExpPoint,
   hundleReduceExpPoint,
+  position
 }) => {
   const hundleChecked = (tasks, id, isCompleted) => {
     if (isCompleted) {
@@ -20,7 +21,7 @@ const TaskItem = ({
   return (
     <div
       key={itemKey}
-      className={`check-container ${task.isRemoved ? "moveToEgg" : ""}`}
+      className={`check-container ${task.isRemoved ? `${position}-moveToEgg` : ""}`}
       onChange={() => hundleChecked(tasks, id, task.isCompleted)}
     >
       <input
