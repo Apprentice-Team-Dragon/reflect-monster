@@ -5,7 +5,9 @@ export default function Goal({goalId}) {
   const [goal, setGoal] = useState(null);
 
   useEffect(() => {
-    const url = `http://localhost:3000/api/goals/${goalId}`; // URL内の{id}を実際のIDで置き換え
+    const url = `http://localhost:3000/api/goals/${goalId}`;
+    // URL内の{id}を実際のIDで置き換え
+    // const url = `http://localhost:3000/api/goals/1`;
 
     const getGoal = async () => {
       try {
@@ -23,6 +25,7 @@ export default function Goal({goalId}) {
   return (
     <div className="mission">
       <div className="mission-contents">
+        <div className="mission-goal">✨Goal✨</div>
         <p>{goal?.content}</p>
       </div>
     </div>
