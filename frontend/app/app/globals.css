@@ -4,6 +4,17 @@ html {
   margin: 0;
 }
 
+.logo{
+  position: absolute;
+  top: 10px;
+  left: 300px;
+}
+
+.logo img {
+  max-width: 100%; /* 最大幅をコンテナの100%に設定 */
+  height: 91px;    /* 高さは自動調整 */
+}
+
 /* カレンダー */
 .calendar-container {
   display: flex;
@@ -114,7 +125,22 @@ body {
 .left-task-contents,
 .right-task-contents {
   flex: 1; /* 左右のタスクリストを均等に伸縮させる */
+
 }
+
+.left-task-contents{
+  margin-top: 200px;
+  margin-left: 60px;
+  font-size: 24px;
+}
+
+.right-task-contents{
+  margin-top: 200px;
+  margin-right: 60px;
+  font-size: 24px;
+}
+
+
 
 .task-list {
   list-style: none;
