@@ -5,7 +5,8 @@ import { getGoalText, postMonster } from "../../utils/api/monsterApi";
 export function useGenerateMonster(
   monster,
   hundleMonsterImage,
-  hundleMonsterExpPoint
+  hundleMonsterExpPoint,
+  goalId
 ) {
   const [isGenerating, setIsGenerating] = useState(false);
   const [hasGenerateError, setHasGenerateError] = useState(false);
@@ -15,20 +16,21 @@ export function useGenerateMonster(
       // TODO ここで、モンスターの経験値をデータベースに保存 DBの値を使って進化できるか判定する
       setIsGenerating(true);
       try {
-        const goalContent = await getGoalText(2);
-        const { imagePath, seed } = await generateMonster(goalContent, monster);
+        const goalContent = await getGoalText(goalId);
+        const { imagePath, seedValue } = await generateMonster(goalContent, monster);
 
         hundleMonsterImage(imagePath);
         hundleMonsterExpPoint(0);
-        postMonster(monster.id, imagePath);
-        console.log(seed);
+        postMonster(monster.id, imagePath, seedValue);
+        console.log(seedValue);
+
       } catch (error) {
         setHasGenerateError(true);
       } finally {
         setIsGenerating(false);
       }
     };
-    if (monster.exp_point >= monster.max_exp_point) {
+    if (monster.exp_point >= monster.max_exp_point && monster.evolution_stage !== 2) {
       console.log(`id=${monster.id}のモンスターを進化します`);
       hundleGenerateMonster();
     }
