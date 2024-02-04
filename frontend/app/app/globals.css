@@ -8,6 +8,7 @@ html {
 .calendar-container {
   display: flex;
   justify-content: center;
+  
 }
 
 .calendar-contents {
@@ -15,9 +16,10 @@ html {
   display: flex;
   align-items: center;
   margin-top: 20px;
-  background-color: #d9d9d9;
+  background-color: #F5F8F7;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
+  box-shadow: 3px 3px 15px -5px #b7b7b7;
 }
 
 .calendar-date {
@@ -45,17 +47,28 @@ body {
   align-items: center;
 }
 
-.mission-contents {
+.mission-contents p{
+  width: 500px;
+  height: 50px;
+  background-color: #F5F8F7;
   text-align: center;
-  flex: 1;
-  padding: 16px 10px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin-top: 20px;
   position: absolute;
-  top: 40px;
+  right: 432px;
+  border-radius: 50px;
+  top: 11%;
+  left: 50%;
+  transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  box-shadow: 3px 3px 15px -5px #b7b7b7;
 }
+
+.mission-goal{
+  position: absolute;
+    top: 9%;
+    left: 37%;
+}
+
+
 
 /* 生成画像表示部分 */
 .main-contents {
@@ -73,12 +86,16 @@ body {
   align-items: center;
   justify-content: center;
   position: absolute;
-  /* top: 201px; */
+  margin-top: 50px;
   bottom: 0;
   right: 0;
   left: 0;
   margin-left: auto;
   margin-right: auto;
+}
+
+.monster-container img {
+  margin-top: 66px;
 }
 
 /* タスク一覧 */
