@@ -39,7 +39,7 @@ class Monster < ApplicationRecord
 
   # デモによって値は修正する
   def set_max_exp
-    self.max_exp_point = 6
+    self.max_exp_point = 2
     self
   end
 

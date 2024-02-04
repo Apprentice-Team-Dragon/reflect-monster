@@ -101,7 +101,7 @@ body {
   align-items: center;
   justify-content: center;
   position: absolute;
-  margin-top: 50px;
+  top: 70px;
   bottom: 0;
   right: 0;
   left: 0;
@@ -124,6 +124,10 @@ body {
   justify-content: space-between; /* 左右に均等に配置 */
   margin: 0 auto; /* 左右の余白を自動で均等に設定 */
   max-width: 1200px; /* 最大幅を設定（必要に応じて調整） */
+}
+
+.check-container {
+  width: 300px;
 }
 
 .left-task-contents,
@@ -177,6 +181,7 @@ body {
   margin-top: 24px; /* 上部マージンを設定 */
 }
 
+/* 経験値 */
 .exp-container {
   display: flex;
   flex-direction: column;
