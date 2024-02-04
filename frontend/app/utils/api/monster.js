@@ -146,7 +146,7 @@ async function uploadImage(base64Image) {
 }
 
 // モンスター生成の一連の処理 monster objectを返す
-export async function generateMonster(goalContent, {evolution_stage, animal, color, seed} = monster) {
+export async function generateMonster(goalContent, {evolution_stage, species, color, seed} = monster) {
 
   // let topLabel = "base";
   // if (evolution_stage === 1) {
@@ -173,7 +173,7 @@ export async function generateMonster(goalContent, {evolution_stage, animal, col
 
   const monsterImageBase64 = await generateMonsterImage(
     topLabel,
-    animal,
+    species,
     color,
     seed
   );
@@ -181,11 +181,11 @@ export async function generateMonster(goalContent, {evolution_stage, animal, col
   const generatedImage = monsterImageBase64.artifacts[0].base64;
 
   //TODO 画像背景透過処理 本番では動作させる
-  const removeBackgroundData = await removeBackground(generatedImage);
-  const removeBackgroundImage = removeBackgroundData.data.result_b64;
-  const imagePath = await uploadImage(removeBackgroundImage);
+  // const removeBackgroundData = await removeBackground(generatedImage);
+  // const removeBackgroundImage = removeBackgroundData.data.result_b64;
+  // const imagePath = await uploadImage(removeBackgroundImage);
 
-  // const imagePath = await uploadImage(generatedImage);
+  const imagePath = await uploadImage(generatedImage);
 
   return { imagePath, seedValue };
 }
