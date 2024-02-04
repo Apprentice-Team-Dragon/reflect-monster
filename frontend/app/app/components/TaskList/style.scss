@@ -87,8 +87,14 @@ input[type="checkbox"]:checked + label:before {
   animation: taskComplete 2s forwards; /* 2秒間でアニメーションを完了 */
 }
 
-.moveToEgg {
-  transform: translate(100px, 100px) scale(0);
+.left-moveToEgg {
+  transform: translate(200px, 200px) scale(0);
   opacity: 0;
   transition: 0.3s;
 }
+.right-moveToEgg {
+  transform: translate(-200px,200px) scale(0);
+  opacity: 0;
+  transition: 0.3s;
+}
+

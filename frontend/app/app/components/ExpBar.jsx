@@ -9,10 +9,10 @@ const BorderLinearProgress = styled(LinearProgress)({
   width: 600,
   height: 50,
   borderRadius: 10,
-  backgroundColor: "#999999",
+  backgroundColor: "#dbdbdb",
   [`& .${linearProgressClasses.bar}`]: {
     borderRadius: 10,
-    backgroundColor: "#33CD32",
+    backgroundColor: "#5bd75a",
   },
 });
 
