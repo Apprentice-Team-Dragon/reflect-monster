@@ -28,7 +28,6 @@ html {
 
 /* メインコンテンツ */
 body {
-  font-family: "Kiwi Maru", sans-serif;
   margin: 0;
   padding: 0;
   height: 100%;
@@ -54,6 +53,8 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
   margin-top: 20px;
+  position: absolute;
+  top: 40px;
 }
 
 /* 生成画像表示部分 */
@@ -154,17 +155,19 @@ body {
 
 /* フッター */
 .footer {
-  width: 100%;
+  width: 1000px;
+  height: 130px;
   padding: 8px 0;
-  background-color: #d9d9d9;
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
+  border-radius: 20px;
+  margin-right: auto;
+  margin-left : auto;
 }
 
 .menu-container {
-  width: 60%;
   margin: auto;
 }
 
@@ -176,6 +179,9 @@ body {
   justify-content: space-around; /* アイテム間に等間隔を設ける */
   align-items: center;
   margin: 0; /* デフォルトのマージンをリセット */
+  background-color: #F5F8F7;
+  border-radius: 40px;
+  box-shadow: 3px 3px 15px -5px #b7b7b7;
 }
 
 .menu-item {
