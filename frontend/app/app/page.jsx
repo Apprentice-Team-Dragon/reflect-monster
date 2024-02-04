@@ -93,6 +93,7 @@ export default function Home() {
             generateMonsterInfo={generateMonsterInfo}
           />
         </div>
+        <div className="expbar">
         <ExpBar
           useMonsterState={useMonsterState}
           isAddExpPoint={isAddExpPoint}
@@ -101,6 +102,7 @@ export default function Home() {
           hundleReduceExpPoint={() => hundleReduceExpPoint()}
           hundleTrueIsAddExpPoint={() => hundleTrueIsAddExpPoint()}
         />
+        </div>
         <div className="footer">
           <Menu
             onClickAddTaskButton={() => setModalIsOpen(true)}
